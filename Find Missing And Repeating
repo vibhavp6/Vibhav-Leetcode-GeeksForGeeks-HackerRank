@@ -1,0 +1,24 @@
+Q) Given an unsorted array Arr of size N of positive integers. One number 'A' from set {1, 2,....,N} is missing and one number 'B' occurs twice in array. Find these two numbers.
+// Solution : 
+class Solve {
+    int[] findTwoElement(int arr[], int n) {
+        int[] result = new int[2]; // results
+        int[] count = new int[n+1]; // to count the frequency 
+
+        // Count the frequency of each number
+        for (int i=0; i<n; i++) {
+            count[arr[i]]++;
+        }
+
+        // check for missing and repeating number
+        for(int i=1; i<=n; i++){
+            if(count[i]==0){
+               result[1]=i;  // missing no.
+           }
+           if(count[i]==2){
+               result[0]=i;  // repeating no.
+           }
+        }
+        return result;
+    }
+}
