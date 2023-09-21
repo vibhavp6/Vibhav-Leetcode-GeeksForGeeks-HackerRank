@@ -1,0 +1,27 @@
+Q ) You are given a string s. You need to reverse the string.
+// solution
+class Reverse
+{
+    // Complete the function
+    // str: input string
+    public static String reverseWord(String vib)
+    {
+        char [] store = vib.toCharArray();
+        int i = 0 , j =store.length-1;
+        while (i <j) {
+            char temp =  store[i];
+            store[i] = store[j];
+            store[j] = temp;
+            i++;
+            j--;
+        }
+        return new String (store);
+    }
+}
+
+// String original = "Merlin";
+// char[] charArray = original.toCharArray(); // ['M', 'e', 'r', 'l', 'i', 'n']
+
+// // reverse the charArray ... ['n', 'i', 'l', 'r', 'e', 'M']
+
+// String reversed = new String(charArray); // "nilreM"
