@@ -1,0 +1,14 @@
+  Q) Linear serch 
+// solution :
+import java.util.*;
+public class Solution {
+    public static int linearSearch(int n, int num, int []arr){
+        int c = arr.length;
+        for (int i =0; i<c; i ++) {
+            if (arr[i] == num) {
+                return i;
+            }
+        }
+        return -1;
+    }
+}
