@@ -1,0 +1,29 @@
+Q) Second Largest Number & Second Smmallest Number
+// solution : 
+public class Solution {
+    public static int[] getSecondOrderElements(int n, int []a) {
+        int c = a.length;
+        int firstMax, secondMax, firstMin, secondMin;
+        firstMax = secondMax = Integer.MIN_VALUE;
+        firstMin = secondMin = Integer.MAX_VALUE;
+
+        for(int i = 0; i<c; i++) {
+
+            if (a[i] > firstMax) {
+                secondMax = firstMax;
+                firstMax = a[i];
+            } else if (a[i] > secondMax && firstMax != a[i]) {
+                secondMax = a[i];
+            }
+
+            if (a[i] < firstMin) {
+                secondMin = firstMin;
+                firstMin = a[i];
+            } else if (a[i] < secondMin && firstMin != a[i]) {
+                secondMin = a[i];
+            }
+        }
+        
+        return new int[] {secondMax, secondMin};
+    }
+}
