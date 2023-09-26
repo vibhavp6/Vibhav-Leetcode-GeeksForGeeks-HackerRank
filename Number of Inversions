@@ -1,0 +1,15 @@
+Q) Number of inversions in an array can be defined as no of pairs i , j such that i <j  and a[i] > a[j]  return the no of inversions.
+// solution : 
+public class Solution {
+    public static int numberOfInversions(int []a, int n) {
+        int count = 0;
+        for (int i =0 ; i<a.length; i++) {
+            for (int j = i +1; j <a.length; j++) {
+              if (i<j && a[i] >a[j]) {
+                count ++;
+              }
+            }
+        }
+        return count;
+    }
+}
