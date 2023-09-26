@@ -1,0 +1,26 @@
+Q) missing and repeating numbers 
+//Solution 
+import java.util.Arrays; 
+
+public class Solution {
+    public static int[] findMissingRepeatingNumbers(int[] a) {
+        Arrays.sort(a);
+        int[] vib = new int[2];
+        int i;
+        
+        if(a[0] != 1){
+            vib[1] = 1; // Case when missing is 1
+        }
+        for (i = 1; i < a.length; i++) {
+            if (a[i] - a[i-1] == 0) {
+                vib[0] = a[i];
+            } else if (a[i] - a[i-1] == 2) {
+                vib[1] = a[i] - 1;
+            }
+        }
+        if (vib[1] == 0) {
+            vib[1] = a[a.length-1] + 1; // Check if the missing number is after the last number
+        }
+        return vib;
+    } 
+}
