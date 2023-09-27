@@ -1,0 +1,12 @@
+Q) Implement Upper Bound
+// solution : 
+public class Solution {
+    public static int upperBound(int []arr, int x, int n){
+        for (int i =0; i<arr.length; i++){
+            if (arr[i] > x) {
+                return i;
+            }
+        }
+        return n ;
+    }
+}
