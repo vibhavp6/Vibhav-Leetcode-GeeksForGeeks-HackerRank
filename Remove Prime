@@ -1,0 +1,41 @@
+Q) This question is based on ArrayList. It states that you have to remove all prime numbers from an ArrayList. Please look at the diagram given below to understand the problem completely.
+
+// solution :
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class removeprime {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("size of the array");
+        int n = sc.nextInt();
+        ArrayList<Integer> al = new ArrayList<>();
+        for (int i = 0; i < n; i ++) {
+            al.add(sc.nextInt());
+        }
+        solution(al);
+        System.out.println(al);
+    }
+
+    static boolean isPrime(int val) {
+        if (val <= 1) {
+            return false;
+        }
+        for (int div = 2; div * div <= val; div++) {
+            if (val % div == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    static void solution(ArrayList<Integer> al) {
+        for (int i = al.size() - 1; i >= 0; i--) {
+            int val = al.get(i);
+            if (isPrime(val)) {
+                al.remove(i);
+            }
+        }
+    }
+}
