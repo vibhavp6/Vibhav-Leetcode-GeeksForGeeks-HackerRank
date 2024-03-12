@@ -1,30 +1,29 @@
-class Solution {
+import java.util.*;
+
+public class Solution {
     public List<List<Integer>> threeSum(int[] nums) {
-        // The result should be a list of lists to store triplets
-        List<List<Integer>> result = new ArrayList<>();
-        int target = 0;
-        
-        // Sort the array to make it easier to avoid duplicates and use two pointers
+        List<List<Integer>> ans = new ArrayList<>();
+        int n = nums.length;
         Arrays.sort(nums);
-        
-        for (int i = 0; i < nums.length - 2; i++) {
-            // Avoid duplicate solutions
-            if (i == 0 || (i > 0 && nums[i] != nums[i-1])) {
-                int lo = i + 1, hi = nums.length - 1, sum = 0 - nums[i];
-                while (lo < hi) {
-                    if (nums[lo] + nums[hi] == sum) {
-                        result.add(Arrays.asList(nums[i], nums[lo], nums[hi]));
-                        while (lo < hi && nums[lo] == nums[lo + 1]) lo++;
-                        while (lo < hi && nums[hi] == nums[hi - 1]) hi--;
-                        lo++; hi--;
-                    } else if (nums[lo] + nums[hi] < sum) {
-                        lo++;
-                    } else {
-                        hi--;
-                    }
+        for (int i = 0; i < n - 2; ++i) {
+            if (i > 0 && nums[i] == nums[i - 1]) continue;
+            int target = -nums[i];
+            int st = i + 1, ed = n - 1;
+            while (st < ed) {
+                int sum = nums[st] + nums[ed];
+                if (sum == target) {
+                    ans.add(Arrays.asList(nums[i], nums[st], nums[ed]));
+                    while (st < ed && nums[st] == nums[st + 1]) ++st;
+                    while (st < ed && nums[ed] == nums[ed - 1]) --ed;
+                    ++st;
+                    --ed;
+                } else if (sum < target) {
+                    ++st;
+                } else {
+                    --ed;
                 }
             }
         }
-        return result;
+        return ans;
     }
 }
