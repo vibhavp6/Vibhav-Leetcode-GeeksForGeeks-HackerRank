@@ -10,11 +10,15 @@ class Solution {
             char sChar = s.charAt(i);
             char tChar = t.charAt(i);
             
-            if (sMap[sChar] != tMap[tChar])
+            if (sMap[sChar] != tMap[tChar]) {
                 return false;
+            } else {
+                sMap[sChar] = i + 1;
+                tMap[tChar] = i + 1;
+            }
+                
             
-            sMap[sChar] = i + 1;
-            tMap[tChar] = i + 1;
+            
         }
         
         return true;
