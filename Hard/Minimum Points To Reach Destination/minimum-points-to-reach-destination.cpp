@@ -4,7 +4,7 @@ using namespace std;
 
 // } Driver Code Ends
 
-    class Solution
+class Solution
 {
 public:
     int solve(vector<vector<int>> &points, int i, int j, int m, int n, vector<vector<int>> &dp)
