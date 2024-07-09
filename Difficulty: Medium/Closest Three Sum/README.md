@@ -1,0 +1,11 @@
+<h2><a href="https://www.geeksforgeeks.org/problems/three-sum-closest/1">Closest Three Sum</a></h2><h3>Difficulty Level : Difficulty: Medium</h3><hr><div class="problems_problem_content__Xm_eO"><p><span style="font-size: 18px;">Given an array, <strong>a</strong><strong>rr</strong> of integers, and another number <strong>target</strong>, find three integers in the array such that their sum is closest to the target. Return the sum of the three integers.</span></p>
+<p><span style="font-size: 18px;">Note: If there are multiple solutions, return the <strong>maximum</strong> one.</span></p>
+<p><span style="font-size: 18px;"><strong>Examples :</strong></span></p>
+<pre><span style="font-size: 18px;"><strong>Input: </strong>arr[] = [-7, 9, 8, 3, 1, 1], target = 2
+<strong>Output: </strong>2<strong>
+Explanation: </strong>There is only one triplet present in the array where elements are -7,8,1 whose sum is 2.</span>
+</pre>
+<pre><span style="font-size: 18px;"><strong>Input: </strong>arr[] = [5, 2, 7, 5], target = 13<br><strong>Output: </strong>14<strong>
+Explanation: </strong>There is one triplet with sum 12 and other with sum 14 in the array. Triplet elements are 5, 2, 5 and 2, 7, 5 respectively. Since abs(13-12) ==abs(13-14) maximum triplet sum will be preferred i.e 14.</span></pre>
+<p><span style="font-size: 18px;"><strong>Expected Time Complexity:&nbsp;</strong>O(n<sup>2</sup>)<br><strong>Expected Auxiliary Space:&nbsp;</strong>O(1)</span></p>
+<p><span style="font-size: 18px;"><strong>Constraints:</strong><br>3 ≤ arr.size() ≤ 10<sup>3</sup><br>-10<sup>5</sup> ≤ arr[i] ≤ 10<sup>5</sup><br>1 ≤ target&nbsp;≤ 10<sup>5</sup></span></p></div><p><span style=font-size:18px><strong>Company Tags : </strong><br><code>Amazon</code>&nbsp;<code>Microsoft</code>&nbsp;<code>Google</code>&nbsp;<code>Apple</code>&nbsp;<br><p><span style=font-size:18px><strong>Topic Tags : </strong><br><code>Arrays</code>&nbsp;<code>Hash</code>&nbsp;<code>Data Structures</code>&nbsp;<code>two-pointer-algorithm</code>&nbsp;
