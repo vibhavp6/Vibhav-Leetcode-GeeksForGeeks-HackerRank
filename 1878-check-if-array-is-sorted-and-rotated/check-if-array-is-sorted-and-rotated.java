@@ -6,7 +6,6 @@ class Solution {
             if(nums[i] > nums[i+1])
                 count++;
         }
-
         if(count == 0)
             return true;
         else if(count > 1)
