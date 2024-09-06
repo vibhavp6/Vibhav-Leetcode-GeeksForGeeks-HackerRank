@@ -9,7 +9,7 @@ class Solution {
         int a =1;
         int b =1;
         int c = 0;
-        if (n>=3) {
+        if (n>= 3) {
             for (int i =2; i <n; i ++) {
                 c = a +b;
                 a = b;
