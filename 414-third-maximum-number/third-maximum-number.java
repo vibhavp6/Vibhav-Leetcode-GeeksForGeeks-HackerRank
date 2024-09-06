@@ -4,7 +4,9 @@ class Solution {
         long max2 = Long.MIN_VALUE;
         long max3 = Long.MIN_VALUE;
 
-        for (int num : nums) {
+        for (int i = 0; i < nums.length; i++) {
+            int num = nums[i];
+
             if (num == max1 || num == max2 || num == max3) {
                 continue;
             }
@@ -21,7 +23,6 @@ class Solution {
             }
         }
 
-        // Return using an if-else statement.
         if (max3 > Long.MIN_VALUE) {
             return (int) max3;
         } else {
