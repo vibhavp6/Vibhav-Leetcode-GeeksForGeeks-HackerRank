@@ -26,15 +26,19 @@ public class Main {
 
 class Solution {
     public int print2largest(int[] arr) {
-        Arrays.sort(arr);
         // Code Here
-        int max = -1;
+        int m1 = -1;
+        int m2 = -1;
         
-        for (int i = 0; i<arr.length-1; i++) {
-            if (arr[i] > max && arr[i+1] != arr[i]){
-                max = arr[i];
+        for (int i = 0; i<arr.length; i++) {
+            if (arr[i] > m1) {
+                m2  =m1;
+                m1 = arr[i]; 
+            } else if  ( arr[i] > m2 && m1 != arr[i]){
+                m2 = arr[i];
             }
         }
-        return max;
+        return m2;
+        
     }
 }
