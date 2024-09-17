@@ -1,7 +1,7 @@
 import java.util.*;
 
 public class Solution {
-    public static List<Integer> spiralOrder(int [][] mat) {  // Changed method name
+    public static List<Integer> spiralOrder(int [][] mat) { 
         List<Integer> ans = new ArrayList<>();
         int n = mat.length;    
         int m = mat[0].length; 
