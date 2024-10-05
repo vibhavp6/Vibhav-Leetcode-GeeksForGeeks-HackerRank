@@ -24,6 +24,8 @@ class GFG {
 // } Driver Code Ends
 
 
+
+
 // User function Template for Java
 
 class Solution {
@@ -38,10 +40,11 @@ class Solution {
         while(i<n &&  j >= 0) {
             sumss += Grid[i][i];
             sum2 += Grid[i][j];
-            diff = Math.abs(sumss - sum2);
+            
             i++;
             j--;
         }
+        diff = Math.abs(sumss - sum2);
         
         return diff;
     }
