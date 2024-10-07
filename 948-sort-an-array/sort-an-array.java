@@ -35,8 +35,8 @@ class Solution {
             temp[k++] = arr[j++];
         }
         
-        for (int l = 0; l < temp.length; l++) {
-            arr[start + l] = temp[l];
+        for (int l = 0,  n = start; l < temp.length; l++, n++) {
+            arr[n] = temp[l];
         }
     }
 }
