@@ -43,15 +43,16 @@ class Main {
 class Solution
 {
     
-  public void printNos(int n)
+  public void printNos(int N)
     {
         //Your code here
-        if (n == 0) return;
-        
-        printNos(n-1);
-        System.out.print(n + " ");
-    }
+        if (N ==0) {
+            return;
+        }
+        printNos(N-1);
+        System.out.print(N + " ");
     
+    }
     
 }
 
