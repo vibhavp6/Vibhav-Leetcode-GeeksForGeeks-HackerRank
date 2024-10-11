@@ -7,7 +7,7 @@ class Solution {
 
         for (int num : nums) {
             sum += num;
-            int diff = sum - k;
+            int diff = sum -k ;
             if (cache.containsKey(diff)) {
                 count += cache.get(diff);
             }
