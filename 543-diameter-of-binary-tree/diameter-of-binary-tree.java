@@ -13,7 +13,7 @@ class Solution {
         int count =  height (root.left) + height(root.right) ;// agr khuyd node hua toh
         if (root.left != null) count ++;
         if (root.right !=  null) count++;
-        int max =  Math.max(leftans , Math.max (rightans , count));
+        int max =  Math.max(count , Math.max (rightans , leftans));
         return max;
     }
 }
