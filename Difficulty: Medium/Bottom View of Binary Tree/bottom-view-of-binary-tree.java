@@ -106,7 +106,9 @@ class GfG {
 			    ArrayList <Integer> res = ob.bottomView(root);
 			    for (Integer num : res) System.out.print (num + " ");
 		     	System.out.println();
-	        }
+	        
+System.out.println("~");
+}
 	}
 }
 
@@ -117,59 +119,43 @@ class GfG {
 //User function Template for Java
 
 
-class Solution
-{
-    //Function to return a list containing the bottom view of the given tree.
-     public ArrayList<Integer> bottomView(Node root) {
-        // Result list to store the bottom view
-        ArrayList<Integer> result = new ArrayList<>();
+class Solution {
+    //Function to return the top view of Binary Tree.
+    static ArrayList<Integer> bottomView(Node root) {
+        ArrayList<Integer> ans = new ArrayList<>();
         
-        // TreeMap to store the bottom view nodes with horizontal distance as key
-        TreeMap<Integer, Integer> map = new TreeMap<>();
-        
-        // Queue for level order traversal
-        Queue<Pair> queue = new LinkedList<>();
-        
-        // Start with the root node at horizontal distance 0
-        if (root != null) {
-            queue.add(new Pair(root, 0));
-        }
-        
-        while (!queue.isEmpty()) {
-            Pair current = queue.poll();
-            Node node = current.node;
-            int hd = current.hd; // Horizontal distance
-            
-            // Update the map with the current node's value
-            map.put(hd, node.data);
-            
-            // Add the left child to the queue with horizontal distance -1
-            if (node.left != null) {
-                queue.add(new Pair(node.left, hd - 1));
-            }
-            
-            // Add the right child to the queue with horizontal distance +1
-            if (node.right != null) {
-                queue.add(new Pair(node.right, hd + 1));
-            }
-        }
-        
-        // Extract the values from the map in order of horizontal distance
-        for (Integer value : map.values()) {
-            result.add(value);
-        }
-        
-        return result; // Return the bottom view
-    }
-}
+        if (root == null) return ans;
 
-// Helper class for storing node and its horizontal distance
-class Pair {
-    Node node;
-    int hd; // horizontal distance
-    
-    Pair(Node node, int hd) {
-        this.node = node;
-        this.hd = hd;
+        // TreeMap to store nodes at each horizontal distance, only the first occurrence
+        TreeMap<Integer, Integer> map = new TreeMap<>();
+        Queue<Node> q = new LinkedList<>();
+        Queue<Integer> index = new LinkedList<>();
+
+        q.add(root);
+        index.add(0);
+
+        while (!q.isEmpty()) {
+            Node temp = q.poll();
+            int pos = index.poll();
+
+            // For top view, we only keep the first occurrence of a node at a horizontal distance
+            // if (!map.containsKey(pos)) {
+            map.put(pos, temp.data);
+
+            if (temp.left != null) {
+                q.add(temp.left);
+                index.add(pos - 1);
+            }
+
+            if (temp.right != null) {
+                q.add(temp.right);
+                index.add(pos + 1);
+            }
+        }
+
+        // Extract the values from the map to the result list
+        ans.addAll(map.values());
+
+        return ans;
     }
 }
