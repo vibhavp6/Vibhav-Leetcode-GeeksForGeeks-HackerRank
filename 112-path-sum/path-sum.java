@@ -19,7 +19,7 @@ class Solution {
 
         // Check if the node is a leaf node
         if (root.left == null && root.right == null) {
-            return targetSum == root.val;
+            if( targetSum == root.val ) return true;
         }
 
         // Recursive calls for left and right subtrees
