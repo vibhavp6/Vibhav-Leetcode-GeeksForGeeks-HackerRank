@@ -13,8 +13,10 @@ public class Main {
             String[] arr1Str = sc.nextLine().split(" ");
             int[] arr = Arrays.stream(arr1Str).mapToInt(Integer::parseInt).toArray();
             Solution ob = new Solution();
-            int ans = ob.print2largest(arr);
+            int ans = ob.getSecondLargest(arr);
             System.out.println(ans);
+
+            System.out.println("~");
         }
     }
 }
@@ -25,20 +27,19 @@ public class Main {
 // User function Template for Java
 
 class Solution {
-    public int print2largest(int[] arr) {
+    public int getSecondLargest(int[] arr) {
         // Code Here
-        int m1 = -1;
-        int m2 = -1;
-        
-        for (int i = 0; i<arr.length; i++) {
-            if (arr[i] > m1) {
-                m2  =m1;
-                m1 = arr[i]; 
-            } else if  ( arr[i] > m2 && m1 != arr[i]){
-                m2 = arr[i];
-            }
+        int ans = -1;
+        TreeSet<Integer>set = new TreeSet<Integer>();
+        for(int el:arr){
+            set.add(el);
         }
-        return m2;
         
+        Integer[] a = set.toArray(new Integer[0]);
+        if(a.length==1){
+            return ans;
+        }
+        ans = a[a.length-2];
+        return ans;
     }
 }
