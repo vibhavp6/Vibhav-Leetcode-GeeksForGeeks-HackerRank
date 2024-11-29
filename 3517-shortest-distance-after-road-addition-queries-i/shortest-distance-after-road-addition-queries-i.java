@@ -1,44 +1,55 @@
+
+
 class Solution {
-    private void updateDistances(List<List<Integer>> graph, int current, int[] distances) {
-        int newDist = distances[current] + 1;
-        
-        for (int neighbor : graph.get(current)) {
-            if (distances[neighbor] <= newDist) continue;
-            
-            distances[neighbor] = newDist;
-            updateDistances(graph, neighbor, distances);
-        }
-    }
-    
     public int[] shortestDistanceAfterQueries(int n, int[][] queries) {
-        int[] distances = new int[n];
-        for (int i = 0; i < n; ++i) {
-            distances[i] = n - 1 - i;
-        }
-        
-        List<List<Integer>> graph = new ArrayList<>();
-        for (int i = 0; i < n; ++i) {
+        // Graph represented as an adjacency list
+        ArrayList<ArrayList<Integer>> graph = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
             graph.add(new ArrayList<>());
         }
-        
-        for (int i = 0; i + 1 < n; ++i) {
-            graph.get(i + 1).add(i);
+
+        // Initialize the graph with the unidirectional roads from city i to city i + 1
+        for (int i = 0; i < n - 1; i++) {
+            graph.get(i).add(i + 1);
         }
-        
-        int[] answer = new int[queries.length];
-        int queryIdx = 0;
-        
-        for (int[] query : queries) {
-            int source = query[0];
-            int target = query[1];
-            
-            graph.get(target).add(source);
-            distances[source] = Math.min(distances[source], distances[target] + 1);
-            updateDistances(graph, source, distances);
-            
-            answer[queryIdx++] = distances[0];
+
+        int[] result = new int[queries.length];
+
+        // Process each query
+        for (int i = 0; i < queries.length; i++) {
+            int u = queries[i][0];
+            int v = queries[i][1];
+            graph.get(u).add(v); // Add the new unidirectional road
+
+            // Calculate the shortest path from city 0 to city n - 1 using BFS
+            result[i] = bfsShortestPath(graph, n, 0, n - 1);
         }
-        
-        return answer;
+
+        return result;
+    }
+
+    private int bfsShortestPath(ArrayList<ArrayList<Integer>> graph, int vertices, int source, int target) {
+        int[] dist = new int[vertices];
+        Arrays.fill(dist, -1); // Initialize distances as -1
+        dist[source] = 0; // Distance to source is 0
+
+        Queue<Integer> queue = new LinkedList<>();
+        queue.offer(source);
+
+        while (!queue.isEmpty()) {
+            int node = queue.poll();
+
+            for (int neighbor : graph.get(node)) {
+                if (dist[neighbor] == -1) { // If not visited
+                    dist[neighbor] = dist[node] + 1;
+                    queue.offer(neighbor);
+                    if (neighbor == target) { // Early exit if target is reached
+                        return dist[neighbor];
+                    }
+                }
+            }
+        }
+
+        return -1; // Return -1 if target is unreachable
     }
 }
