@@ -11,11 +11,9 @@ class GFG {
         while (t-- > 0) {
             String input = br.readLine();
             String[] inputArray = input.split("\\s+");
-            ArrayList<Integer> a = new ArrayList<>();
+            int a[] = new int[inputArray.length];
 
-            for (String s : inputArray) {
-                a.add(Integer.parseInt(s));
-            }
+            for (int i = 0; i < a.length; i++) a[i] = Integer.parseInt(inputArray[i]);
 
             Solution ob = new Solution();
             ob.sort012(a);
@@ -24,41 +22,40 @@ class GFG {
                 System.out.print(num + " ");
             }
             System.out.println();
+            System.out.println("~");
         }
     }
 }
+
 
 // } Driver Code Ends
 
-
 class Solution {
-    // Function to sort an array of 0s, 1s, and 2s
-    public void sort012(ArrayList<Integer> arr) {
-        // code here
-        int zero=0;
-        int one=0;
-        int two=0;
-        for(int i=0;i<arr.size();i++){
-            if(arr.get(i)==0){
-                zero++;
-            }else if(arr.get(i)==1){
-                one++;
-            }else{
-                two++;
+    public void sort012(int[] nums) {
+    int left = 0, current = 0, right = nums.length - 1;
+
+    while (current <= right) {
+        if (nums[current] == 0) {
+            // Swap current element with left pointer
+            int temp = nums[current];
+            nums[current] = nums[left];
+            nums[left] = temp;
+
+            left++;
+            current++;
+        } else if (nums[current] == 1) {
+            current++;
+        } else {
+            // Swap current element with right pointer
+                int temp = nums[current];
+                nums[current] = nums[right];
+                nums[right] = temp;
+    
+                right--;
             }
-        }
-        int idx=0;
-        while(zero-->0){
-            arr.set(idx,0);
-            idx++;
-        }
-        while(one-->0){
-            arr.set(idx,1);
-            idx++;
-        }
-        while(two-->0){
-            arr.set(idx,2);
-            idx++;
         }
     }
 }
+
+//{ Driver Code Starts.
+// } Driver Code Ends
