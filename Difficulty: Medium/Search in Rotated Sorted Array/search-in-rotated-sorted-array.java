@@ -29,6 +29,8 @@ public class GFG {
             int key = Integer.parseInt(in.readLine().trim());
 
             out.println(new Solution().search(arr, key));
+
+            out.println("~");
         }
         out.close();
     }
@@ -36,39 +38,19 @@ public class GFG {
 // } Driver Code Ends
 
 
-// User function Temp
+// User function Template for Java
 
 class Solution {
     int search(int[] arr, int key) {
-        int left = 0;
-        int right = arr.length - 1;
-        
-        while (left <= right) {
-            int mid = left + (right - left) / 2;
-            
-            if (arr[mid] == key) {
-                return mid;
-            }
-            
-            // Check if the left half is sorted
-            if (arr[left] <= arr[mid]) {
-                // If the key is in the range of the left half
-                if (arr[left] <= key && key < arr[mid]) {
-                    right = mid - 1;
-                } else {
-                    left = mid + 1;
-                }
-            } else { // The right half is sorted
-                // If the key is in the range of the right half
-                if (arr[mid] < key && key <= arr[right]) {
-                    left = mid + 1;
-                } else {
-                    right = mid - 1;
-                }
+        int n = arr.length;
+        if(n<1 && arr[0] != key){  // check the size of the array and if the 
+            return -1;                 // intial index it is not present then return -1.
+        }
+        for(int i=0;i<n;i++){
+            if(arr[i]==key){
+                return i;
             }
         }
-        
-        return -1; // key not found
-    
+        return -1;
     }
 }
