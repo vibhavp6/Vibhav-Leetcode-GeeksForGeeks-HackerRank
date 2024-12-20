@@ -20,6 +20,8 @@ class GFG {
             ArrayList<Integer> ans = ob.spirallyTraverse(matrix);
             for (Integer val : ans) System.out.print(val + " ");
             System.out.println();
+
+            System.out.println("~");
         }
     }
 }
@@ -28,46 +30,90 @@ class GFG {
 
 class Solution {
     // Function to return a list of integers denoting spiral traversal of matrix.
-    public ArrayList<Integer> spirallyTraverse(int matrix[][]) {
+    public ArrayList<Integer> spirallyTraverse(int mat[][]) {
         // code here
-        ArrayList<Integer> list = new ArrayList<>();
-        if (matrix == null || matrix.length == 0) return list;
-
-        int top = 0, bottom = matrix.length - 1;
-        int left = 0, right = matrix[0].length - 1;
-
-        while (top <= bottom && left <= right) {
-            // Traverse from left to right
-            for (int i = left; i <= right; i++) {
-                list.add(matrix[top][i]);
+        int n=mat.length;
+        int m=mat[0].length;
+        
+        ArrayList<Integer> ans=new ArrayList<Integer>();
+        
+        int dgnl=0;
+        int x=Math.min(n,m);
+        while(dgnl<x){
+            boolean anyUpdate=false;
+            
+            int i=dgnl;
+            int j=dgnl;
+            
+            //->
+            while(j<(m-dgnl)){
+                ans.add(mat[i][j]);
+                anyUpdate=true;
+                if(j==(m-1-dgnl))
+                    break;
+                j++;
+                
             }
-            top++;
-
-            // Traverse from top to bottom
-            for (int i = top; i <= bottom; i++) {
-                list.add(matrix[i][right]);
+           if(anyUpdate==false)
+                break;
+            anyUpdate=false;
+            
+            
+            
+            
+            //down
+            i++;
+            while(i<(n-dgnl)){
+                ans.add(mat[i][j]);
+                anyUpdate=true;
+                if(i==(n-1-dgnl))
+                    break;
+                i++;
+                
             }
-            right--;
-
-            // Check if we are still within the boundaries after the updates
-            if (top <= bottom) {
-                // Traverse from right to left
-                for (int i = right; i >= left; i--) {
-                    list.add(matrix[bottom][i]);
-                }
-                bottom--;
+            if(anyUpdate==false)
+                break;
+            anyUpdate=false;
+            
+            
+            
+            
+            
+            //<-
+            j--;
+            while(j>=dgnl){
+                ans.add(mat[i][j]);
+                anyUpdate=true;
+                if(j==dgnl)
+                    break;
+                j--;
+                
             }
-
-            // Check if we are still within the boundaries after the updates
-            if (left <= right) {
-                // Traverse from bottom to top
-                for (int i = bottom; i >= top; i--) {
-                    list.add(matrix[i][left]);
-                }
-                left++;
+            if(anyUpdate==false)
+                break;
+            anyUpdate=false;
+                        
+            
+            
+            
+            
+            
+            //up
+            i--;
+            while(i>dgnl){
+                ans.add(mat[i][j]);
+                anyUpdate=true;
+                if(i==(dgnl+1))
+                    break;
+                i--;    
             }
+            
+            if(anyUpdate==false)
+                break;
+            dgnl++;   
         }
-
-        return list;
+        
+        return ans;
+        
     }
 }
