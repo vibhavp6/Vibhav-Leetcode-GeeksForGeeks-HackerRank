@@ -17,8 +17,8 @@ class Solution {
             } 
         }
     }
-    public void swap (int[] nums, int i, int j) { // add an array parameter
-    int temp = nums[i]; // use the array to access the elements
+    public void swap (int[] nums, int i, int j) { 
+    int temp = nums[i]; 
     nums[i] = nums[j];
     nums[j] = temp;
  }
