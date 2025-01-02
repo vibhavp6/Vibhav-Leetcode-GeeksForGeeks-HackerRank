@@ -44,6 +44,8 @@ class Main {
             }
 
             System.out.println();
+
+            System.out.println("~");
         }
     }
 }
@@ -53,31 +55,24 @@ class Main {
 
 // User function Template for Java
 
-
-
 class Solution {
     // Function to return a list containing the intersection of two arrays.
     static ArrayList<Integer> intersection(int arr1[], int arr2[]) {
-        HashSet<Integer> hs = new HashSet<>();
-        HashSet<Integer> hs1 = new HashSet<>();
-        
-        // Add all elements of arr1 to the first HashSet
+        // add your code here
+         HashSet <Integer> ss = new HashSet<>();
         for (int num : arr1) {
-            hs.add(num);
+            ss.add(num);
         }
-        
-        // Add elements from arr2 that are present in hs to hs1
+
+        HashSet <Integer> sm = new HashSet <>();
         for (int num : arr2) {
-            if (hs.contains(num)) {
-                hs1.add(num);
+            if (ss.contains(num)) {
+                sm.add(num);
             }
         }
+         ArrayList<Integer> result = new ArrayList<>(sm);
+        Collections.sort(result);  
         
-        // Convert the HashSet hs1 to a sorted ArrayList
-        ArrayList<Integer> result = new ArrayList<>(hs1);
-        Collections.sort(result);  // Sort the ArrayList in natural order
-        
-        return result;  // Return the sorted ArrayList
+        return result;
     }
 }
-
