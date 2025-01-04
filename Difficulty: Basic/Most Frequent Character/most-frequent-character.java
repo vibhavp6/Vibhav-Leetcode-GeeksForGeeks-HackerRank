@@ -23,26 +23,25 @@ class GFG {
 
 
 
-
 class Solution {
-    // Function to find the maximum occurring character in a string.
     public static char getMaxOccuringChar(String line) {
-        HashMap<Character, Integer> cc = new HashMap<>();
+        int[] freq = new int[256];
         int max = 0;
-        char maxChar = ' '; 
+        char maxChar = ' ';
 
         for (char c : line.toCharArray()) {
-            cc.put(c, cc.getOrDefault(c, 0) + 1);
+            freq[c]++;
         }
 
-        for (char c : cc.keySet()) {
-            int count = cc.get(c);
-            if (count > max || (count == max && c < maxChar)) {
-                max = count;
-                maxChar = c;
+        for (int i = 0; i < 256; i++) {
+            if (freq[i] > max) {
+                max = freq[i];
+                maxChar = (char) i;
+            } else if (freq[i] == max && (char) i < maxChar) {
+                maxChar = (char) i;
             }
         }
-        
-        return maxChar; 
+
+        return maxChar;
     }
 }
