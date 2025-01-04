@@ -1,0 +1,7 @@
+<h2><a href="https://www.geeksforgeeks.org/problems/print-matrix-in-snake-pattern-1587115621/1">Print Matrix in snake Pattern</a></h2><h3>Difficulty Level : Difficulty: Easy</h3><hr><div class="problems_problem_content__Xm_eO"><p><span style="font-size: 18px;">Given a<strong>&nbsp;matrix&nbsp;</strong>of size<strong> N x N</strong>. Print the elements of the matrix in the snake like pattern depicted below.<br><img style="height: 375px; width: 500px;" src="https://contribute.geeksforgeeks.org/wp-content/uploads/snake-pattern.jpg" alt=""></span></p>
+<p><span style="font-size: 18px;"><strong>Examples :</strong></span></p>
+<pre><span style="font-size: 18px;"><strong>Input</strong>: N = 3, matrix[][] = [[45, 48, 54], [21, 89, 87], [70, 78, 15]]
+<strong>Output</strong>: 45 48 54 87 89 21 70 78 15&nbsp;
+<strong>Explanation</strong>: Printing it in snake pattern will lead to the output as 45 48 54 87 89 21 70 78 15.</span></pre>
+<pre><span style="font-size: 18px;"><strong>Input</strong>: N = 2, matrix[][] = [[1, 2], [3, 4]]<br></span><span style="font-size: 18px;"><strong>Output</strong>: 1 2 4 3 <br></span><span style="font-size: 18px;"><strong>Explanation</strong>: Printing it in snake pattern will give output as 1 2 4 3.</span></pre>
+<p><span style="font-size: 18px;"><strong>Constraints:</strong><br>1 &lt;= N &lt;= 10<sup>3</sup><br>1 &lt;= mat[i][j] &lt;= 10<sup>9</sup></span></p></div><br><p><span style=font-size:18px><strong>Topic Tags : </strong><br><code>Matrix</code>&nbsp;<code>Data Structures</code>&nbsp;
