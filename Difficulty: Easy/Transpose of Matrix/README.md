@@ -1,0 +1,7 @@
+<h2><a href="https://www.geeksforgeeks.org/problems/transpose-of-matrix-1587115621/1">Transpose of Matrix</a></h2><h3>Difficulty Level : Difficulty: Easy</h3><hr><div class="problems_problem_content__Xm_eO"><p><span style="font-size: 18px;">Write a program to find the <strong>transpose </strong>of a square matrix&nbsp;of size N*N. Transpose of a matrix is obtained by changing rows to columns and columns to rows.</span><br><br><span style="font-size: 18px;"><strong>Examples :</strong></span></p>
+<pre><span style="font-size: 18px;"><strong>Input</strong>: N = 4, mat[][] = [[1, 1, 1, 1], [2, 2, 2, 2], [3, 3, 3, 3], [4, 4, 4, 4]]
+<strong>Output</strong>: [[1, 2, 3, 4] , [1, 2, 3, 4], [1, 2, 3, 4], [1, 2, 3, 4]] </span>
+</pre>
+<pre><span style="font-size: 18px;"><strong>Input</strong>: N = 2, mat[][] = [[1, 2],[9, -2]]
+<strong>Output</strong>: [[1, 9], [2, -2]]</span></pre>
+<p><span style="font-size: 18px;"><br><strong>Constraints:</strong><br>1 &lt;= N &lt;= 10<sup>3</sup><br>-10<sup>9</sup> &lt;= mat[i][j] &lt;= 10<sup>9</sup></span></p></div><p><span style=font-size:18px><strong>Company Tags : </strong><br><code>MakeMyTrip</code>&nbsp;<code>InfoEdge</code>&nbsp;<code>Bloomberg</code>&nbsp;<br><p><span style=font-size:18px><strong>Topic Tags : </strong><br><code>Matrix</code>&nbsp;<code>Data Structures</code>&nbsp;
