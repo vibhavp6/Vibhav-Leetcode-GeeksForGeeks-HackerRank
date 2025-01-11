@@ -2,25 +2,20 @@
 import java.io.*;
 import java.util.*;
 
-
-class Node
-{
+class Node {
     int data;
     Node left;
     Node right;
 
-    Node(int data)
-    {
+    Node(int data) {
         this.data = data;
         left = null;
         right = null;
     }
 
-    public static Node buildTree(String str)
-    {
+    public static Node buildTree(String str) {
         // Corner Case
-        if(str.length()==0 || str.charAt(0)=='N')
-            return null;
+        if (str.length() == 0 || str.charAt(0) == 'N') return null;
 
         // Creating array of Strings from input
         // String after spliting by space
@@ -35,8 +30,7 @@ class Node
 
         // Starting from the second element
         int i = 1;
-        while(queue.size()>0 && i < ip.length)
-        {
+        while (queue.size() > 0 && i < ip.length) {
 
             // Get and remove the front of the queue
             Node currNode = queue.peek();
@@ -46,8 +40,7 @@ class Node
             String currVal = ip[i];
 
             // If the left child is not null
-            if(!currVal.equals("N"))
-            {
+            if (!currVal.equals("N")) {
 
                 // Create the left child for the current node
                 currNode.left = new Node(Integer.parseInt(currVal));
@@ -57,14 +50,12 @@ class Node
 
             // For the right child
             i++;
-            if(i >= ip.length)
-                break;
+            if (i >= ip.length) break;
 
             currVal = ip[i];
 
             // If the right child is not null
-            if(!currVal.equals("N"))
-            {
+            if (!currVal.equals("N")) {
 
                 // Create the right child for the current node
                 currNode.right = new Node(Integer.parseInt(currVal));
@@ -78,55 +69,41 @@ class Node
         return root;
     }
 
-    public static Node inputTree(BufferedReader br) throws IOException
-    {
+    public static Node inputTree(BufferedReader br) throws IOException {
         return buildTree(br.readLine().trim());
     }
 
-    public static void inorder(Node root)
-    {
-        if (root == null)
-           return;
+    public static void inorder(Node root) {
+        if (root == null) return;
         inorder(root.left);
         System.out.print(root.data + " ");
         inorder(root.right);
     }
 }
 
-
-class IntMatrix
-{
-    public static int[][] input(BufferedReader br, int n, int m) throws IOException
-    {
+class IntMatrix {
+    public static int[][] input(BufferedReader br, int n, int m) throws IOException {
         int[][] mat = new int[n][];
 
-        for(int i = 0; i < n; i++)
-        {
+        for (int i = 0; i < n; i++) {
             String[] s = br.readLine().trim().split(" ");
             mat[i] = new int[s.length];
-            for(int j = 0; j < s.length; j++)
-                mat[i][j] = Integer.parseInt(s[j]);
+            for (int j = 0; j < s.length; j++) mat[i][j] = Integer.parseInt(s[j]);
         }
 
         return mat;
     }
 
-    public static void print(int[][] m)
-    {
-        for(var a : m)
-        {
-            for(int e : a)
-                System.out.print(e + " ");
+    public static void print(int[][] m) {
+        for (var a : m) {
+            for (int e : a) System.out.print(e + " ");
             System.out.println();
         }
     }
 
-    public static void print(ArrayList<ArrayList<Integer>> m)
-    {
-        for(var a : m)
-        {
-            for(int e : a)
-                System.out.print(e + " ");
+    public static void print(ArrayList<ArrayList<Integer>> m) {
+        for (var a : m) {
+            for (int e : a) System.out.print(e + " ");
             System.out.println();
         }
     }
@@ -137,22 +114,23 @@ class GFG {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int t;
         t = Integer.parseInt(br.readLine());
-        while(t-- > 0){
-            
+        while (t-- > 0) {
+
             Node root = Node.inputTree(br);
-            
+
             Solution obj = new Solution();
             ArrayList<ArrayList<Integer>> res = obj.Paths(root);
-            
+
             IntMatrix.print(res);
-            
-        
-System.out.println("~");
-}
+
+            System.out.println("~");
+        }
     }
 }
 
 // } Driver Code Ends
+
+
 
 
 /*
