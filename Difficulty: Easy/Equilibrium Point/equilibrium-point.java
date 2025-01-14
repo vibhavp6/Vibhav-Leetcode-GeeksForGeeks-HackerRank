@@ -14,21 +14,23 @@ class Main {
             String[] tokens = line.split(" ");
 
             // Create an ArrayList to store the integers
-            ArrayList<Long> array = new ArrayList<>();
+            ArrayList<Integer> array = new ArrayList<>();
 
             // Parse the tokens into integers and add to the array
             for (String token : tokens) {
-                array.add(Long.parseLong(token));
+                array.add(Integer.parseInt(
+                    token)); // Use Integer.parseInt to parse int values
             }
 
-            long[] arr = new long[array.size()];
+            int[] arr = new int[array.size()];
             int idx = 0;
-            for (long i : array) arr[idx++] = i;
+            for (int i : array) arr[idx++] = i;
 
             Solution obj = new Solution();
 
-            // calling maxSubarraySum() function
-            System.out.println(obj.equilibriumPoint(arr));
+            // calling equilibriumPoint() function
+            System.out.println(obj.findEquilibrium(arr));
+            System.out.println("~");
         }
     }
 }
@@ -37,31 +39,18 @@ class Main {
 
 
 class Solution {
-    // arr: input array
-    // Function to find equilibrium point in the array.
-    public static int equilibriumPoint(long arr[]) {
-        // Your code here
-        int n =arr.length;
-        long sum = 0;
-        long leftsum =0;
-        long temp = -1;
-        
-        for (int i = 0 ; i<n; i++) {
-            sum += arr[i];
+    public static int findEquilibrium(int arr[]) {
+        int totalsum =0, leftsum = 0;
+        for(int x : arr){
+            totalsum += x;
         }
-        
-        if (n==1) return 1;
-        
-        for (int i =0; i<n; i++) {
-        
-            leftsum += arr[i];
-            if (sum == leftsum) {
-                temp =i+1;
+        for(int i=0; i<arr.length; i++){
+            totalsum -= arr[i];
+            if(leftsum == totalsum){
+                return i;
             }
-            
-                sum -= arr[i];
+            leftsum += arr[i];
         }
-        
-        return (int) temp ;
+        return -1;
     }
 }
