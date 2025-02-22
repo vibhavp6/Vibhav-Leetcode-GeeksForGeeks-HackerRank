@@ -26,12 +26,13 @@ class Solution {
     // Function to count nodes of a linked list.
     public int getCount(Node head) {
         // code here
-          int size=0;
-        while(head!=null){
-            size++;
-            head=head.next;
+        Node temp = head;
+        int count = 0;
+        while (temp != null) {
+            count ++;
+            temp = temp.next;
         }
-        return size;
+        return count;
     }
 }
 
@@ -57,7 +58,9 @@ class LinkedList {
             }
             Solution ob = new Solution();
             System.out.println(ob.getCount(head));
-        }
+        
+System.out.println("~");
+}
     }
 }
 
