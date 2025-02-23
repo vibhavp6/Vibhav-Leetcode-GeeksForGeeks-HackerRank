@@ -33,29 +33,20 @@ class Solution {
     // Return the sum of last k nodes
     public int sumOfLastN_Nodes(Node head, int n) {
         // write code here
-        int totalNodes = 0;
-        Node current = head;
-        
-        while(current != null){
-            current = current.next;
-            totalNodes++;
+        Node fast = head;
+        Node slow = head;
+        for (int i = 0; i<n ; i++) {
+            fast = fast.next;
         }
-        
-        int target = totalNodes - n;
-        current = head;
-        
-        while(target > 0){
-            current = current.next;
-            target--;
+        while (fast!= null ) {
+            fast = fast.next;
+            slow = slow.next;
         }
-        
         int sum = 0;
-        
-        while(current != null){
-            sum += current.data;
-            current = current.next;
+        while (slow != null) {
+            sum += slow.data;
+            slow = slow.next;
         }
-        
         return sum;
     }
 }
@@ -83,7 +74,9 @@ class LinkedList {
             }
             Solution ob = new Solution();
             System.out.println(ob.sumOfLastN_Nodes(head, n));
-        }
+        
+System.out.println("~");
+}
     }
 }
 
