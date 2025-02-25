@@ -36,7 +36,9 @@ class GfG {
             Solution obj = new Solution();
             head = obj.addOne(head);
             printList(head);
-        }
+        
+System.out.println("~");
+}
     }
 }
 // } Driver Code Ends
@@ -55,25 +57,40 @@ class Node{
 */
 
 class Solution {
+    public Node revnode (Node head) {
+            Node curr = head;
+            Node prev = null;
+            while (curr != null) {
+                Node nextnode = curr.next;
+                curr.next = prev;
+                prev = curr;
+                curr = nextnode;
+            }
+            return prev;
+        }
     public Node addOne(Node head) {
         // code here.
-        int carry = helper(head);
-        if(carry > 0){
-            Node node = new Node(1);
-            node.next = head;
-            head = node;
+        
+        Node reverse = revnode(head);
+        int carry = 1;
+        Node temp = reverse;
+        while (temp != null) {
+            if (carry == 1) {
+                temp.data += 1;
+                carry = temp.data/10;
+                temp.data %= 10;
+            } else {
+                head = revnode(reverse);
+                return head;
+            }
+            temp = temp.next;
+        }
+        head = revnode(reverse);
+        if (carry == 1) {
+            Node one = new Node(1);
+            one.next = head;
+            return one;
         }
         return head;
-    }
-    
-    private int helper(Node node){
-        if(node == null) return 1;
-        int carry = helper(node.next);
-        node.data = node.data+carry;
-        if(node.data > 9){
-            node.data = 0;
-            return 1;
-        }
-        return 0;
     }
 }
