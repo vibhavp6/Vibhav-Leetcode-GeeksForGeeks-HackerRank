@@ -57,7 +57,7 @@ class Node{
 */
 
 class Solution {
-    public Node revnode (Node head) {
+    public Node revLL (Node head) {
             Node curr = head;
             Node prev = null;
             while (curr != null) {
@@ -70,26 +70,22 @@ class Solution {
         }
     public Node addOne(Node head) {
         // code here.
-        
-        Node reverse = revnode(head);
+        Node rvs = revLL(head);
         int carry = 1;
-        Node temp = reverse;
-        while (temp != null) {
-            if (carry == 1) {
-                temp.data += 1;
-                carry = temp.data/10;
-                temp.data %= 10;
-            } else {
-                head = revnode(reverse);
-                return head;
-            }
-            temp = temp.next;
+        Node curr = rvs;
+        while (curr != null) {
+            int sum = carry + (curr.data);
+            curr.data = sum % 10;
+            carry = sum / 10;
+            curr = curr.next;
         }
-        head = revnode(reverse);
-        if (carry == 1) {
-            Node one = new Node(1);
-            one.next = head;
-            return one;
+
+        head = revLL(rvs);
+
+        if (carry > 0) {
+            Node newNode = new Node(carry);
+            newNode.next = head;
+            return newNode;
         }
         return head;
     }
