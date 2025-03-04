@@ -31,40 +31,46 @@ class GFG {
 
 
 //Back-end complete function Template for Java
+
 class Solution {
-    public static int findPages(int[] nums, int m) {
-
-        int n = nums.length;
-        if(m > n){
-            return -1;
-        }
-        int start = 0;
-        int end = 0;
-        for (int i = 0; i < nums.length; i++) {
-            start = Math.max(start,nums[i]);
-            end += nums[i];
-        }
-        // binary search
-        while (start<end){
-            int mid = start+ (end -start)/2;
-            int sum = 0;
-            int pieces = 1;
-            for(int num: nums){
-                if (sum+num > mid){
-                    sum = num;
-                    pieces++;
-
-                }  else {
-                    sum+= num;
-                }
+ public int check (int mid, int [] arr ,int days) {
+        int day = 1;
+        long sum = 0;
+        for (int i = 0; i<arr.length; i++) {
+            if (sum + arr[i] > mid) {
+                day++;
+                sum = arr[i];
             }
-            if(pieces>m){
-                start= mid + 1;
-            } else {
-                end = mid;
+            else {
+                sum += arr[i];
+            }
+            if (day > days) return 1; 
+        }
+        return 0;
+    }
+    public int findPages(int[] arr, int days) {
+        if(arr.length < days) return -1;
+        int sumr = 0, suml = arr[0], left = -1, right = -1, ans = -1;
+        for (int i = 0 ; i<arr.length; i++) {
+            sumr += arr[i]; 
+            if(arr[i] > suml) suml = arr[i];
+        }
+        right = sumr;
+        left = suml;
+
+
+        while (left<=right) {
+            int mid = left + (right-left)/2;
+            int flg = check(mid,arr,days);
+
+            if(flg == 1) {
+                left = mid+1;
+            }
+            else {
+                ans = mid;
+                right = mid-1;
             }
         }
-        return end;
+        return ans;
     }
 }
- 
