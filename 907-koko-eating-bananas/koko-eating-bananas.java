@@ -11,8 +11,15 @@ class Solution {
         return 0;
     } 
     public int minEatingSpeed(int[] piles, int h) {
-        int left = 1 , right = 1000000000 , ans = -1;
 
+        int left = 1 , right = -1 , ans = -1;
+        int maxvalue = piles[0];
+        for (int i = 0; i<piles.length; i++) {
+            if(piles[i] > maxvalue){
+                maxvalue = piles[i];
+            }
+            right = maxvalue;
+        }
         while(left<=right) {
             int mid = left +(right-left)/2;
             int flg = check(mid,piles,h);
