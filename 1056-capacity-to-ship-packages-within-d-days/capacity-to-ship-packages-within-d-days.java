@@ -1,41 +1,42 @@
 class Solution {
-    public int check (int mid, int [] arr ,int days) {
+    public int check(long mid , int [] weights , int days) {
+        int n = weights.length;
         int day = 1;
-        long sum = 0;
-        for (int i = 0; i<arr.length; i++) {
-            if (sum + arr[i] > mid) {
+         long ans = 0;
+         for (int i = 0; i<n; i++) {
+            if(ans + weights[i] > mid) {
                 day++;
-                sum = arr[i];
+                ans = weights[i];
             }
             else {
-                sum += arr[i];
+                ans += weights[i];
             }
-            if (day > days) return 1; 
-        }
-        return 0;
+             if (day>days) return 2;
+         }
+         return 0;
     }
-    public int shipWithinDays(int[] arr, int days) {
-        int sumr = 0, suml = arr[0], left = -1, right = -1, ans = -1;
-        for (int i = 0 ; i<arr.length; i++) {
-            sumr += arr[i]; 
-            if(arr[i] > suml) suml = arr[i];
+    public int shipWithinDays(int[] weights, int days) {
+        long left = -1 , right = -1, maxval = weights[0] , ts = 0 ,ans = -1;;
+        int n = weights.length;
+        for (int i = 0; i<n; i++) {
+            ts+= weights[i];
+            if(weights[i] > maxval) {
+                maxval = weights[i];
+            }
+            left = maxval;
+            right = ts;
         }
-        right = sumr;
-        left = suml;
-
-
-        while (left<=right) {
-            int mid = left + (right-left)/2;
-            int flg = check(mid,arr,days);
-
-            if(flg == 1) {
+        while(left<=right) {
+            long mid = left + (right -left)/2;
+            long flg = check(mid, weights, days);
+            if(flg == 2){
                 left = mid+1;
             }
-            else {
+            else{
                 ans = mid;
-                right = mid-1;
+                right = mid -1;
             }
         }
-        return ans;
+        return (int) ans ;
     }
 }
