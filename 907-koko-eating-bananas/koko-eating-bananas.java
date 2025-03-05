@@ -1,36 +1,35 @@
 class Solution {
-    public int check (int mid , int[] piles , int h) {
-        int ans = 0;
-        for (int i = 0; i <piles.length; i++) {
-            ans +=piles[i]/mid;
+    public int check (long mid , int[]piles, int h){
+        long temph = 0;
+        for(int i = 0; i<piles.length;i++){
+            temph += piles[i]/mid;
             if(piles[i]%mid != 0) {
-                ans += 1;
+                temph ++;
             }
-            if (ans>h) return 1;
-        } 
+            if (temph> h) return 2;
+        }
         return 0;
-    } 
+    }
     public int minEatingSpeed(int[] piles, int h) {
-
-        int left = 1 , right = -1 , ans = -1;
-        int maxvalue = piles[0];
+        long left = 1, right = piles.length-1 , ans = -1 , maxval = piles[0];
         for (int i = 0; i<piles.length; i++) {
-            if(piles[i] > maxvalue){
-                maxvalue = piles[i];
+            if(piles[i] > maxval) {
+                maxval = piles[i];
             }
-            right = maxvalue;
+            right = maxval;
         }
         while(left<=right) {
-            int mid = left +(right-left)/2;
-            int flg = check(mid,piles,h);
-            if(flg == 1) {
-                left = mid+1;
+            long mid = left + (right-left)/2;
+            long flagg = check(mid , piles , h);
+            if(flagg == 2) {
+                left = mid +1;
             }
-            else if(flg == 0) {
+            else {
                 ans = mid;
                 right = mid-1;
             }
+
         }
-        return ans;
+        return (int) ans;
     }
 }
