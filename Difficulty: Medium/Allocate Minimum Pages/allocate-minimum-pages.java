@@ -33,44 +33,44 @@ class GFG {
 //Back-end complete function Template for Java
 
 class Solution {
- public int check (int mid, int [] arr ,int days) {
-        int day = 1;
+    public static int check (long mid, int []arr ,int k) {
+        long partition = 1;
         long sum = 0;
-        for (int i = 0; i<arr.length; i++) {
-            if (sum + arr[i] > mid) {
-                day++;
+        for(int i = 0; i<arr.length;i++){
+            if (sum+arr[i] > mid) {
+                partition ++;
                 sum = arr[i];
-            }
+            } 
             else {
-                sum += arr[i];
+              sum +=arr[i];
             }
-            if (day > days) return 1; 
+            if (partition>k) return 1;
         }
         return 0;
     }
-    public int findPages(int[] arr, int days) {
-        if(arr.length < days) return -1;
-        int sumr = 0, suml = arr[0], left = -1, right = -1, ans = -1;
-        for (int i = 0 ; i<arr.length; i++) {
-            sumr += arr[i]; 
-            if(arr[i] > suml) suml = arr[i];
+    public static int findPages(int[] arr, int k) {
+        // code here
+        if(arr.length < k) return -1;
+        long left = -1 , right = -1 , maxval = arr[0] , sum = 0 ,ans = -1;
+        for (int i = 0; i<arr.length; i++){
+            sum += arr[i];
+            if (arr[i] > maxval) {
+                maxval = arr[i];
+            }
         }
-        right = sumr;
-        left = suml;
-
-
-        while (left<=right) {
-            int mid = left + (right-left)/2;
-            int flg = check(mid,arr,days);
-
-            if(flg == 1) {
-                left = mid+1;
+        left = maxval;
+        right = sum;
+        while(left<=right){
+            long mid  = left + (right-left)/2;
+            int flag = check(mid,arr,k);
+            if(flag == 1) {
+                left = mid +1;
             }
             else {
                 ans = mid;
-                right = mid-1;
+                right = mid -1;
             }
         }
-        return ans;
+        return (int)ans;
     }
 }
