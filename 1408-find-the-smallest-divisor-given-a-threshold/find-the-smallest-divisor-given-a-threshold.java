@@ -1,37 +1,37 @@
+
 class Solution {
-    public int check (int mid , int [] nums , int threshold) {
-        long ans = 0;
-        for (int i = 0; i<nums.length; i++) {
-            ans += nums[i]/mid; // jab bhi divide ho make sure mid ki value zero na ho i.e. left =1;
-            if(nums[i]%mid != 0) {
-                ans += 1;
+    public int check(long mid, int[] piles, int h) {
+        long temph = 0;
+        for (int i = 0; i < piles.length; i++) {
+            temph += piles[i] / mid;
+            if (piles[i] % mid != 0) {
+                temph++;
             }
-             if (ans > threshold) return 1;
+            if (temph > h) return 2; 
         }
-         return 0;
+        return 0; 
     }
-    public int smallestDivisor(int[] nums, int threshold) {
-        int left = 1,  right = -1, ans = -1;
-        int max = nums[0];
-        for (int i = 0; i<nums.length; i++) {
-            if (nums[i] > max) {
-                max = nums[i];
-            }
 
+    public int smallestDivisor(int[] piles, int h) {
+        long maxval = piles[0];
+        for (int i = 0; i < piles.length; i++) {
+            if (piles[i] > maxval) {
+                maxval = piles[i];
+            }
         }
-        right = max;
+        long left = 1, right = maxval; // Correct range
+        long ans = -1;
 
-        while(left<= right) {
-            int mid = left + (right-left)/2;
-            int flg = check(mid,nums,threshold);
-            if(flg == 1) {
-                left = mid +1;
-            }
-            else if (flg == 0) {
+        while (left <= right) {
+            long mid = left + (right - left) / 2;
+            int flagg = check(mid, piles, h);
+            if (flagg == 2) {
+                left = mid + 1;
+            } else {
                 ans = mid;
-                right = mid -1;
+                right = mid - 1;
             }
         }
-        return ans;
+        return (int) ans;
     }
 }
