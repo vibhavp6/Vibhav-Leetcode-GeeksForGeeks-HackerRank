@@ -24,16 +24,17 @@ this function*/
 class Solution {
     int floorSqrt(int n) {
         // Your code here
-        long left = 0 , right = n, ans = -1;
-        while (left<=right){
+        long left =1 , right = n , ans  = -1;
+        while (left<=right) {
             long mid = left + (right-left)/2;
-            if(mid *mid == n) return (int) mid;
-            if (mid*mid > n) right = mid-1;
-            else{
+            if(mid*mid == n) return (int)mid;
+            else if (mid*mid > n) {
+                right = mid -1;
+            } else {
                 ans = mid;
                 left = mid +1;
             }
         }
-        return (int)ans;
+        return (int) ans;
     }
 }
