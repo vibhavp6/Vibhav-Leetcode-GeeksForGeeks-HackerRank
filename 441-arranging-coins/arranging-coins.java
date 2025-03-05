@@ -1,22 +1,18 @@
 class Solution {
     public int arrangeCoins(int n) {
-        int left = 1, right = n;
-        int ans = -1;
-
-        while(left <= right){
-            int mid =  left + (right - left) / 2;
-
-            
-            if( mid*1.0  / 2 == n*1.0 / (mid + 1)) return mid;
-            if( mid*1.0  / 2 > n*1.0 / (mid + 1)){
-                right = mid -1; 
+        long left =1 ,  right = n , ans =-1;
+        while (left<=right) {
+            long mid = left + (right-left)/2;
+            long sum = (mid *(mid+1)/2);
+            if (sum == n) return (int) mid;
+            else if (sum > n) {
+                right = mid -1;
             }
-            else {
+            else{
                 ans = mid;
                 left = mid+1;
             }
-
         }
-        return ans;
+        return (int)ans;
     }
 }
