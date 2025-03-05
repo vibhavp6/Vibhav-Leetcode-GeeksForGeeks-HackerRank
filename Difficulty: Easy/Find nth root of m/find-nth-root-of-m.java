@@ -27,30 +27,29 @@ class GFG {
 // User function Template for Java
 
 class Solution {
-    public int check (long mid , int n, int m) {
+    public int check(long mid,int n ,int m) {
         long p = 1;
-        for(int i =0 ;i<n; i++) {
-            p *=mid;
+        for(int i = 0 ; i <n; i++) {
+            p *= mid;
+            if(p > m) return 2;
         }
-        
-        if (p > m) return 2;
-        else if (p <m) return 1;
-        
+        if(p<m) return 1;
         return 0;
     }
     public int nthRoot(int n, int m) {
         // code here
-        long left = 0, right = m;
+        long left = 1 , right = m;
         while(left<=right) {
             long mid = left + (right-left)/2;
-            int flag= check(mid,n,m) ;
-            if (flag == 0) return (int)mid;
-            else if(flag ==1) {
-                left = mid+1;
-            }
-            else{
-                right = mid-1;
-            }
+            long flag = check(mid,n,m);
+                if(flag == 0) return (int) mid;
+                else if( flag == 1) {
+                    left = mid+1;
+                }
+                else{
+                    right = mid-1;
+                }
+            
         }
         return -1;
     }
