@@ -66,23 +66,23 @@ class Solution {
     public static Node findUnion(Node head1, Node head2) {
         // Add your code here.
         TreeSet <Integer> ans = new TreeSet<>();
-        Node dummy = new Node(-1);
-        Node pt = dummy;
-        Node temp = head1;
-        while(temp != null) {
-            ans.add(temp.data);
-            temp = temp.next;
-        }
-        temp = head2;
-        while(temp != null) {
-            ans.add(temp.data);
-            temp = temp.next;
-        }
-        for (Integer it : ans) {
-            Node node = new Node(it);
-            pt.next = node;
-            pt = pt.next;
-        }
-        return dummy.next;
+            Node dummy = new Node(-1);
+            Node trv = dummy;
+            Node temp = head1;
+            while (temp  != null) {
+                ans.add(temp.data);
+                temp = temp.next;
+            }
+            temp = head2;
+            while (temp  != null) {
+                ans.add(temp.data);
+                temp = temp.next;
+            }
+            for (Integer it : ans) {
+                Node node = new Node(it);
+                trv.next = node;
+                trv = trv.next;
+            }
+            return dummy.next;
     }
 }
