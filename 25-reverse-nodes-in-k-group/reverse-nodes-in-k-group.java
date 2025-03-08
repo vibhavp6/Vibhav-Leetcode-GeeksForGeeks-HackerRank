@@ -9,56 +9,44 @@
  * }
  */
 class Solution {
-    public ListNode reverseLinkedList(ListNode head) {
-        ListNode b = head;
+    public ListNode reverse (ListNode head) {
+        ListNode curr = head;
         ListNode prev = null;
-
-        while (b != null) {
-            ListNode front = b.next;
-            b.next = prev;
-            prev = b;
-            b = front;
+        while (curr!= null) {
+            ListNode temp = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = temp;
         }
-
         return prev;
     }
-
-    public ListNode getKthNode(ListNode a, int k) {
-        k -= 1;
-        while (a != null && k > 0) {
-            k--;
-            a = a.next;
-        }
-        return a;
-    }
-
-    public ListNode reverseKGroup(ListNode head, int k) {
+    public ListNode kthNode (ListNode head , int k) {
         ListNode temp = head;
-        ListNode prevLast = null;
-
-        while (temp != null) {
-            ListNode kThNode = getKthNode(temp, k);
-            if (kThNode == null) {
-                if (prevLast != null) {
-                    prevLast.next = temp;
-                }
-                break;
-            }
-
-            ListNode nextNode = kThNode.next;
-            kThNode.next = null;
-            reverseLinkedList(temp);
-
-            if (temp == head) {
-                head = kThNode;
-            } else {
-                prevLast.next = kThNode;
-            }
-
-            prevLast = temp;
-            temp = nextNode;
+        for(int i= 1; i<k ; i++) {
+            if(temp.next == null) return null;
+            temp = temp.next;
         }
-
+        return temp;
+    }
+    public ListNode reverseKGroup(ListNode head, int k) {
+        ListNode curr = head;
+        ListNode prev = null;
+        while(curr!= null) {
+            ListNode temp = kthNode(curr , k);
+            if(temp == null) break;
+            ListNode nextnode = temp.next;
+            temp.next = null;
+            reverse(curr);
+            if(head == curr) {
+                head = temp;
+                curr.next = nextnode;
+            }else{
+                prev.next = temp;
+                curr.next = nextnode;
+            }
+            prev = curr;
+            curr = nextnode;
+        }
         return head;
-    }  
+    }
 }
