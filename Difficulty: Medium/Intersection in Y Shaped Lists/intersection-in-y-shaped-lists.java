@@ -119,21 +119,18 @@ class LinkedList
 class Intersect {
     // Function to find intersection point in Y shaped Linked Lists.
     static Node intersectPoint(Node head1, Node head2) {
-        HashSet <Node> ans = new HashSet<>();
+        // code here
+        HashSet<Node> set = new HashSet<>();
         Node temp = head1;
-        while (temp!= null) {
-            ans.add(temp);
+        while(temp!= null) {
+            set.add(temp);
             temp = temp.next;
         }
         temp = head2;
-        while (temp != null) {
-            if (ans.contains(temp)) {
-                return temp;
-            } else {
-                temp = temp.next;
-            }
+        while(temp != null) {
+            if(set.contains(temp)) return temp;
+            temp = temp.next;
         }
         return null;
-
     }
 }
