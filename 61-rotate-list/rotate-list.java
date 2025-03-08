@@ -18,9 +18,12 @@ class Solution {
             temp = temp.next;
         }
 
-        temp.next = head;
+        
         k = k%cnt;
-    
+        if(k == 0) return head;
+
+        temp.next = head;
+        
         temp = head;
         for (int i = 0;i < cnt-k-1; i++){
             temp = temp.next;
