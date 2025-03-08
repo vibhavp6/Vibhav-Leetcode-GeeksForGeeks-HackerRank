@@ -75,21 +75,22 @@ class Node{
 class Solution{
     Node removeDuplicates(Node head){
         // Code Here.
-        if (head == null) return null;
-        
         Node curr = head;
-        while (curr != null) {
-            Node point = curr.next;
-            while (point != null && point.data == curr.data) {
+        while(curr!=null){
+             Node point = curr.next;
+            while(point != null && point.data == curr.data){
                 point = point.next;
             }
-            curr.next = point;
             
-            if (point!= null) {
+            if(point!= null){
                 point.prev = curr;
             }
+            curr.next = point;
             curr = curr.next;
+            
         }
         return head;
+        
+       
     }
 }
