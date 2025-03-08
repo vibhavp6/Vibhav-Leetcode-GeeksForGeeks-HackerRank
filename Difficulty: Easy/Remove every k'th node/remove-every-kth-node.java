@@ -68,21 +68,24 @@ class Node
     }
 }*/
 class Solution {
+    Node getkth (Node head , int k) {
+        Node temp = head;
+        for(int i =1; i<k-1; i++){
+            if(temp.next == null) return null;
+            temp = temp.next;
+        }
+        return temp;
+    }
     /*You are required to complete this method*/
     Node deleteK(Node head, int k) {
         // Your code here
-        Node temp = head;
-        if (k ==1) return null;
-        int count = 1;
-        while (temp != null && temp.next!= null) {
-            if (count == k-1) {
-                temp.next = temp.next.next;
-                temp = temp.next;
-                count = 1;
-            } else {
-                temp = temp.next;
-                count++;
-            }
+        Node curr = head;
+        while(curr !=  null){
+             Node temp = getkth(curr,k);
+             if(temp == null || temp.next == null) break;
+             temp.next = temp.next.next;
+             curr = temp.next;
+             
         }
         return head;
     }
