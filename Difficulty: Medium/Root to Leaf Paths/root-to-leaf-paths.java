@@ -173,8 +173,8 @@ class Solution {
             ans.add(new ArrayList<>(temp));
         }
         
-        path(root.left, temp, ans);
-        path(root.right, temp, ans);
+        if (root.left!= null ) path(root.left, temp, ans);
+        if (root.right!= null ) path(root.right, temp, ans);
         temp.remove(temp.size()-1);
     }
 }
