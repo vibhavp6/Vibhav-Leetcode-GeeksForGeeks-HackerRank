@@ -9,21 +9,22 @@
  * }
  */
 class Solution {
-    public ListNode reverse (ListNode head) {
+    public ListNode reverse(ListNode head){
         ListNode curr = head;
         ListNode prev = null;
-        while (curr!= null) {
-            ListNode temp = curr.next;
+        while(curr!= null){
+            ListNode nextnode = curr.next;
             curr.next = prev;
             prev = curr;
-            curr = temp;
+            curr = nextnode;
         }
         return prev;
     }
-    public ListNode kthNode (ListNode head , int k) {
-        ListNode temp = head;
-        for(int i= 1; i<k ; i++) {
-            if(temp.next == null) return null;
+
+    public ListNode getkh (ListNode head, int k){
+        ListNode temp =  head;
+        for(int i = 0; i<k-1; i++) {
+            if(temp.next== null) return null;
             temp = temp.next;
         }
         return temp;
@@ -32,18 +33,17 @@ class Solution {
         ListNode curr = head;
         ListNode prev = null;
         while(curr!= null) {
-            ListNode temp = kthNode(curr , k);
+            ListNode temp = getkh(curr , k);
             if(temp == null) break;
             ListNode nextnode = temp.next;
             temp.next = null;
-            reverse(curr);
-            if(head == curr) {
+            reverse(curr); 
+            if(head == curr){
                 head = temp;
-                curr.next = nextnode;
             }else{
                 prev.next = temp;
-                curr.next = nextnode;
             }
+            curr.next = nextnode;
             prev = curr;
             curr = nextnode;
         }
