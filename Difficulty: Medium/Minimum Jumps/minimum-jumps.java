@@ -27,42 +27,60 @@ public class Main {
             for (int i : array) arr[idx++] = i;
 
             System.out.println(new Solution().minJumps(arr));
-            // System.out.println("~");
+            System.out.println("~");
         }
     }
 }
 
 // } Driver Code Ends
 
+
 class Solution {
     static int minJumps(int[] arr) {
-        // your code here
+        int n = arr.length;
         
-        int jumps=0;
-        int currentIndex=0;
-        int farIndex=0;
+        // If there are less than two elements, no jumps are needed
+        if (n <= 1) {
+            return 0;
+        }
         
-        //if arr length is 0 or 1st element is 0
-        if(arr.length==0 || arr[0]==0) return -1;
+        // If the first element is 0, it's not possible to move forward
+        if (arr[0] == 0) {
+            return -1;
+        }
         
-        //for length 1
-        else if(arr.length==1) return 1;
+        // Initialize variables
+        int jumps = 1; // Start from the first jump
+        int maxReach = arr[0]; // The farthest we can reach
+        int steps = arr[0]; // The number of steps we can take
         
-        else {
-            for(int i=0; i<arr.length-1; i++){
-                farIndex=Math.max(farIndex, i+arr[i]);
+        // Traverse the array
+        for (int i = 1; i < n; i++) {
+            // If we reached the end of the array
+            if (i == n - 1) {
+                return jumps;
+            }
+            
+            // Update the maxReach
+            maxReach = Math.max(maxReach, i + arr[i]);
+            
+            // Decrease steps
+            steps--;
+            
+            // If steps become 0, we need to increase the jump count
+            if (steps == 0) {
+                jumps++;
                 
-                if(i==currentIndex){
-                    jumps++;
-                    currentIndex=farIndex;
-                    
-                    if(currentIndex>=arr.length-1) return jumps;
-                    
+                // If we can't move forward, return -1
+                if (i >= maxReach) {
+                    return -1;
                 }
                 
+                // Reset steps to the number of steps we can take from the current position
+                steps = maxReach - i;
             }
         }
-        return -1;
+        
+        return -1; // This line will never be reached if the solution is possible
     }
 }
-
