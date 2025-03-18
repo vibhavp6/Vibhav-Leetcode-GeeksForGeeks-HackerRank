@@ -34,29 +34,17 @@ class Main {
 class Solution {
     public int longestSubarray(int[] arr, int k) {
         // code here
-         HashMap<Integer, Integer> prefixSumMap = new HashMap<>();
-        int maxLength = 0;
-        int prefixSum = 0;
-
-        for (int i = 0; i < arr.length; i++) {
-            prefixSum += arr[i];
-
-            // Check if the prefix sum equals k
-            if (prefixSum == k) {
-                maxLength = i + 1;
+        int ans = 0 , sum  = 0;
+        HashMap<Integer ,Integer> mpp = new HashMap<>();
+        mpp.put(0,-1);
+        for (int i = 0; i<arr.length; i++){
+            sum += arr[i];
+            
+            if (mpp.containsKey(sum - k)) {
+                ans = Math.max(ans, i - mpp.get(sum - k));
             }
-
-            // Check if there is a prefix sum such that removing it gives sum k
-            if (prefixSumMap.containsKey(prefixSum - k)) {
-                maxLength = Math.max(maxLength, i - prefixSumMap.get(prefixSum - k));
-            }
-
-            // Add the current prefix sum to the map if it is not already present
-            if (!prefixSumMap.containsKey(prefixSum)) {
-                prefixSumMap.put(prefixSum, i);
-            }
+            mpp.putIfAbsent(sum , i);
         }
-
-        return maxLength;
+        return ans;
     }
 }
