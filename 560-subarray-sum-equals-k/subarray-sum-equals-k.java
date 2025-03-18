@@ -1,19 +1,19 @@
+
 class Solution {
-    public int subarraySum(int[] nums, int k) {
-        Map<Integer, Integer> cache = new HashMap<>();
-        cache.put(0, 1);
-        int count = 0;
+    public int subarraySum(int[] nums, int goal) {
+        int ans = 0;
         int sum = 0;
-
-        for (int num : nums) {
+        HashMap<Integer , Integer> mpp = new HashMap<>();
+        mpp.put(0,1);
+        for(int num : nums) {
             sum += num;
-            int diff = sum -k ;
-            if (cache.containsKey(diff)) {
-                count += cache.get(diff);
-            }
-            cache.put(sum, cache.getOrDefault(sum, 0) + 1);
-        }
 
-        return count;
+            if(mpp.containsKey(sum - goal)) {
+                ans  += mpp.get(sum - goal);
+            }
+
+            mpp.put(sum , mpp.getOrDefault(sum , 0) +1);
+        }
+        return ans;
     }
 }
