@@ -1,15 +1,18 @@
 class Solution {
     public int searchInsert(int[] nums, int target) {
-        int n = nums.length;
-        
-        // Returns the position of target in sorted array nums. 
-        // If target is not present in nums, it would return the position where it can be inserted to maintain the sorted order of nums.
-        for (int i=0; i<n; i++) {
-            if (nums[i] >= target) {
-                return i;
-            }
+        int left = 0, right = nums.length - 1 ,  ans = -1;
+        int length = nums.length;
+        if ((target > nums[nums.length-1]))  return length;
+        while(left<=right){
+             int mid = left + (right - left) / 2;
+             if (nums[mid] < target){
+                left = mid+1;
+             }
+             else  {
+                ans = mid;
+                right = mid-1;
+             }
         }
-        
-        return n;
+        return ans;
     }
 }
