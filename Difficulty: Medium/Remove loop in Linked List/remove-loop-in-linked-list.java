@@ -123,7 +123,7 @@ class Solution {
             return;
         }
 
-        while (slow != fast.next) {
+        while (fast.next != slow) {
             slow = slow.next;
             if(fast.next == slow) break;
             fast = fast.next;
