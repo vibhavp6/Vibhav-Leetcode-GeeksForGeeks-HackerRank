@@ -14,6 +14,7 @@ class Node {
 
 
 // } Driver Code Ends
+
 /*
 Node class is as follows:
 
@@ -35,21 +36,22 @@ class Solution {
         // write code here
         Node fast = head;
         Node slow = head;
-        for (int i = 0; i<n ; i++) {
+        for(int i =0 ; i<n; i++) {
             fast = fast.next;
         }
-        while (fast!= null ) {
+        while(fast!= null) {
             fast = fast.next;
-            slow = slow.next;
+            slow = slow.next;;
         }
         int sum = 0;
-        while (slow != null) {
+        while(slow!= null){
             sum += slow.data;
-            slow = slow.next;
+            slow =slow.next;
         }
         return sum;
     }
 }
+
 
 //{ Driver Code Starts.
 
