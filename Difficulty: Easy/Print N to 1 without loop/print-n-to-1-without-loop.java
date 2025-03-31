@@ -13,10 +13,14 @@ class Main {
             Solution obj = new Solution();
             obj.printNos(N);
             System.out.println();
-        }
+        
+System.out.println("~");
+}
     }
 }
 // } Driver Code Ends
+
+
 
 
 class Solution {
