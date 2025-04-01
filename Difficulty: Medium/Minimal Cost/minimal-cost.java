@@ -6,26 +6,36 @@ import java.util.*;
 
 
 // } Driver Code Ends
+
 // User function Template for Java
 
+import java.util.Arrays;
+
 class Solution {
-    public int minimizeCost(int k, int arr[]) {
-        int[] dp = new int[arr.length];
-        Arrays.fill(dp,100000);
-        dp[0] = 0;   // cost for first stone
+    private int solve(int index, int k, int[] arr, int[] dp) {
+        if (index == arr.length - 1) return 0;  // Base case
+        if (dp[index] != -1) return dp[index];  // Memoization check
+
+        int minCost = Integer.MAX_VALUE;
         
-        for(int i=0 ; i<arr.length-1 ; i++) {
-            for(int j=i+1;j<arr.length && j<=i+k ; j++) {
-                
-                // Explore next k stones
-                
-                dp[j] = Math.min(dp[j], dp[i] + Math.abs(arr[i]-arr[j]));
-            }
+        // Try all jumps from 1 to k
+        for (int j = 1; j <= k && index + j < arr.length; j++) {
+            int jumpCost = Math.abs(arr[index] - arr[index + j]) + solve(index + j, k, arr, dp);
+            minCost = Math.min(minCost, jumpCost);
         }
-        
-        return dp[arr.length-1];
+
+        return dp[index] = minCost;  // Store and return the result
+    }
+
+    public int minimizeCost(int k, int arr[]) {
+        int n = arr.length;
+        int[] dp = new int[n];
+        Arrays.fill(dp, -1);
+        return solve(0, k, arr, dp);
     }
 }
+
+
 
 //{ Driver Code Starts.
 
@@ -53,6 +63,8 @@ class GFG {
             int res = obj.minimizeCost(k, arr);
 
             System.out.println(res);
+
+            System.out.println("~");
         }
     }
 }
