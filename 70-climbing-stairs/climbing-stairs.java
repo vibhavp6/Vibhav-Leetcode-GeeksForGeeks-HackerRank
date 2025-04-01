@@ -1,17 +1,18 @@
+import java.util.Arrays;
 class Solution {
+
+    public int helper(int n , int []dp) {
+        if(n<=2)return n;
+        if (dp [n] != -1) return dp[n];
+
+        dp[n] = helper(n-1, dp) +  helper(n-2,dp);
+        return dp[n];
+    }
+
     public int climbStairs(int n) {
-        int ways = 1;
+        int [] dp = new int [n+1];
 
-        for (int i = 1; i <= n / 2; i++) {
-            double sum = 1;
-
-            for (int j = i; j < 2 * i; j++) {
-                sum *= (double)(n - j) / (j - i + 1);
-            }
-
-            ways += sum;
-        }
-
-        return ways;
+        Arrays.fill(dp , -1);
+        return helper(n, dp);
     }
 }
