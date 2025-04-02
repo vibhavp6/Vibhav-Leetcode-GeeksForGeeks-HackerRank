@@ -46,30 +46,37 @@ public class Main {
 
 // } Driver Code Ends
 
+
 // User function Template for Java
+
 class Solution {
-    private int solve(int index, int[] height, int[] dp) {
-        if (index == height.length - 1) return 0;  
-        if (dp[index] != -1) return dp[index];
+    
+    public int helper (int [] nums, int index , int []dp) {
+        if (index>= nums.length-1) return 0;
 
-        int oneStep = solve(index + 1, height, dp) + Math.abs(height[index] - height[index + 1]);
-        int twoStep = Integer.MAX_VALUE;
+        if (dp[index] != -1) return dp [index];
         
-        if (index < height.length - 2)
-            twoStep = solve(index + 2, height, dp) + Math.abs(height[index] - height[index + 2]);
+        int onestep = Math.abs(nums[index] - nums[index+1]) + helper(nums, index+1 , dp);
+        int twostep = Integer.MAX_VALUE;
+          if (index < nums.length - 2) {
+               twostep = Math.abs(nums[index] - nums[index+2]) + helper (nums , index +2 ,dp);
+          }
+        
 
-        return dp[index] = Math.min(oneStep, twoStep);
+        return dp[index] = Math.min(onestep , twostep);
     }
-
-    public int minCost(int[] height) {
+    
+    
+    int minCost(int[] height) {
+        // code here
         int n = height.length;
-        int[] dp = new int[n];
-        
-        for(int i = 0; i < n; i++) dp[i] = -1;
-        
-        return solve(0, height, dp);
+        int [] dp = new int [n];
+          for(int i = 0; i < n; i++) dp[i] = -1;
+        return helper(height, 0 , dp);
     }
 }
+
+
 
 
 //{ Driver Code Starts.
