@@ -9,29 +9,28 @@ import java.util.*;
 
 // User function Template for Java
 
-import java.util.Arrays;
-
 class Solution {
-    private int solve(int index, int k, int[] arr, int[] dp) {
-        if (index == arr.length - 1) return 0;  // Base case
-        if (dp[index] != -1) return dp[index];  // Memoization check
-
-        int minCost = Integer.MAX_VALUE;
-        
-        // Try all jumps from 1 to k
-        for (int j = 1; j <= k && index + j < arr.length; j++) {
-            int jumpCost = Math.abs(arr[index] - arr[index + j]) + solve(index + j, k, arr, dp);
-            minCost = Math.min(minCost, jumpCost);
+    
+    public int helper (int k ,int [] nums, int index , int []dp) {
+        if (index>= nums.length-1) return 0;
+        if (dp[index] != -1) return dp [index];
+        int mincost = Integer.MAX_VALUE;
+        for (int j = 1; j <= k && index + j <nums.length; j++) {
+            int kstep = Math.abs(nums[index] - nums[index+j]) + helper(k , nums, index+j , dp);
+            mincost = Math.min(mincost, kstep);
         }
+        
 
-        return dp[index] = minCost;  // Store and return the result
+        return dp[index] = mincost;
     }
-
+    
+    
     public int minimizeCost(int k, int arr[]) {
+        // code here
         int n = arr.length;
-        int[] dp = new int[n];
-        Arrays.fill(dp, -1);
-        return solve(0, k, arr, dp);
+        int [] dp = new int [n];
+          for(int i = 0; i < n; i++) dp[i] = -1;
+        return helper( k ,arr, 0 , dp);
     }
 }
 
