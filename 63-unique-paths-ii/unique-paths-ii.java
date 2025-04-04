@@ -8,7 +8,6 @@ class Solution {
             return 0;
         }
         if (grid [i][j] == 1) return 0;
-        
         if (i == n - 1 && j == m - 1) {
             return 1;
         }
