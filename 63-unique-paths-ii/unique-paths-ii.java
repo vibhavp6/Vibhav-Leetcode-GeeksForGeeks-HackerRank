@@ -12,7 +12,6 @@ class Solution {
         if (i == n - 1 && j == m - 1) {
             return 1;
         }
-
         if (dp[i][j] != -1) {
             return dp[i][j];
         }
