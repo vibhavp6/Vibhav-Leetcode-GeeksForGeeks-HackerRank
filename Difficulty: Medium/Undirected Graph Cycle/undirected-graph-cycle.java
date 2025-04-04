@@ -1,60 +1,62 @@
 //{ Driver Code Starts
+// Initial Template for Java
 import java.io.*;
-import java.lang.*;
 import java.util.*;
 
 class GFG {
-    public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int T = Integer.parseInt(br.readLine().trim());
-        while (T-- > 0) {
-            String[] s = br.readLine().trim().split(" ");
-            int V = Integer.parseInt(s[0]);
-            int E = Integer.parseInt(s[1]);
-            ArrayList<ArrayList<Integer>> adj = new ArrayList<>();
-            for (int i = 0; i < V; i++) adj.add(i, new ArrayList<Integer>());
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int tc = sc.nextInt();
+        while (tc-- > 0) {
+            int V = sc.nextInt();
+            int E = sc.nextInt();
+            int[][] edges = new int[E][2];
             for (int i = 0; i < E; i++) {
-                String[] S = br.readLine().trim().split(" ");
-                int u = Integer.parseInt(S[0]);
-                int v = Integer.parseInt(S[1]);
-                adj.get(u).add(v);
-                adj.get(v).add(u);
+                edges[i][0] = sc.nextInt();
+                edges[i][1] = sc.nextInt();
             }
-            Solution obj = new Solution();
-            boolean ans = obj.isCycle(adj);
-            if (ans)
-                System.out.println("1");
-            else
-                System.out.println("0");
 
+            Solution obj = new Solution();
+            boolean ans = obj.isCycle(V, edges);
+            System.out.println(ans ? "true" : "false");
             System.out.println("~");
         }
+        sc.close();
     }
 }
+
 // } Driver Code Ends
 
-
 class Solution {
-    Boolean checkForCycle(int node, int parent, boolean vis[], ArrayList<ArrayList<Integer>> adj){
-        vis[node] = true;
-        for (Integer it : adj.get(node)) {
-            if (!vis[it]) {
-                if (checkForCycle(it, node, vis, adj)) return true;
-            } else if (it != parent) {
+    public boolean isCycle(int V, int[][] edges) {
+        // Code here
+        int[] parent = new int[V];
+        for(int i=0; i<V; i++){
+            parent[i] = i;
+        }
+        
+        for(int[] edge : edges){
+            int u = edge[0];
+            int v = edge[1];
+            int parentU = find(parent, u);
+            int parentV = find(parent, v);
+            
+            if(parentU == parentV){
                 return true;
             }
+            union(parent, parentU, parentV);
         }
         return false;
     }
-
-    public boolean isCycle(ArrayList<ArrayList<Integer>> adj) {
-        int V = adj.size();
-        boolean vis[] = new boolean[V];
-        for (int i = 0; i < V; i++) {
-            if (!vis[i]) {
-                if (checkForCycle(i, -1, vis, adj)) return true;
-            }
+    
+    private int find(int[] parent, int vertex){
+        if(parent[vertex] != vertex){
+            parent[vertex] = find(parent, parent[vertex]);
         }
-        return false;
+        return parent[vertex];
+    }
+    
+    private void union(int[] parent, int u, int v){
+        parent[u] = v;
     }
 }
