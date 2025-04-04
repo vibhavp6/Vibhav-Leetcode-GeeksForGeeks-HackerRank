@@ -3,7 +3,7 @@ class Solution {
     public int solve(List<List<Integer>> triangle , int i , int j, int [][]dp){
          int n = triangle.size();
 
-        if (i >= n) return 0;
+        if (i >= n || j>=n) return 0;
 
         if (dp[i][j] != Integer.MAX_VALUE) return dp[i][j];
         int op1= triangle.get(i).get(j) + solve (triangle, i+1 , j ,dp);
