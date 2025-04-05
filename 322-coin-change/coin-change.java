@@ -1,30 +1,29 @@
 class Solution {
-    int dp [];
-    int solve(int[] coins, int amount ){
-        int n  = coins.length;
-        if(amount == 0) return 0;
-        if(amount < 0) return Integer.MAX_VALUE;
-        if(dp[amount] != -1) return dp[amount];
+    int[] dp;
 
-        int op = Integer.MAX_VALUE;
+    public int coinChange(int[] coins, int amount) {
+        dp = new int[amount + 1];
+        Arrays.fill(dp, -1);
+        int ans = countMinCoins(coins, amount);
+        return (ans == Integer.MAX_VALUE) ? -1 : ans;
+    }
 
-        for(int i = 0; i < coins.length; i++){
-            int tmp = solve(coins, amount - coins[i]);
+    private int countMinCoins(int[] coins, int amount) {
+        // Base case
+        if (amount == 0) return 0;
+        if (amount < 0) return Integer.MAX_VALUE;
 
-            if(tmp != Integer.MAX_VALUE){
-                op = Math.min(op, tmp + 1);
+        if (dp[amount] != -1) return dp[amount];
+
+        int minCoins = Integer.MAX_VALUE;
+
+        for (int coin : coins) {
+            int res = countMinCoins(coins, amount - coin);
+            if (res != Integer.MAX_VALUE) {
+                minCoins = Math.min(minCoins, res + 1);
             }
         }
 
-        return dp[amount] = op;
-    }
-    public int coinChange(int[] coins, int amount) {
-        dp = new int[amount+1];
-        Arrays.fill(dp, -1);
-        int ans =  solve(coins, amount );
-
-        if(ans == Integer.MAX_VALUE) return -1;
-
-        return ans;
+        return dp[amount] = minCoins;
     }
 }
