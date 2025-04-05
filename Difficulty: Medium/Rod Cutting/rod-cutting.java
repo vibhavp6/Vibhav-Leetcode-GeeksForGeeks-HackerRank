@@ -34,16 +34,12 @@ class Solution {
         
         if (dp[targetLen] != -1) return dp[targetLen];
 
-        int maxProfit = 0;
+        int maxProfit = Integer.MIN_VALUE;
 
         // Try all cut lengths from 1 to targetLen
         for (int i = 1; i <= targetLen; i++) {
-
-            if (i <= targetLen) {
-                int profit = price[i - 1] + solve(price, targetLen - i);
-                
-                maxProfit = Math.max(maxProfit, profit);
-            }
+            int profit = price[i - 1] + solve(price, targetLen - i);
+            maxProfit = Math.max(maxProfit, profit);
         }
 
         return dp[targetLen] = maxProfit;
