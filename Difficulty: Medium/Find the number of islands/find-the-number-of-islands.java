@@ -1,61 +1,66 @@
 //{ Driver Code Starts
 import java.util.*;
-import java.lang.*;
-import java.io.*;
+
 class GFG {
-    public static void main(String[] args) throws IOException {
-        BufferedReader br =
-            new BufferedReader(new InputStreamReader(System.in));
-        int T = Integer.parseInt(br.readLine().trim());
-        while (T-- > 0) {
-            String[] s = br.readLine().trim().split(" ");
-            int n = Integer.parseInt(s[0]);
-            int m = Integer.parseInt(s[1]);
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int tc = scanner.nextInt();
+        while (tc-- > 0) {
+            int n = scanner.nextInt();
+            int m = scanner.nextInt();
             char[][] grid = new char[n][m];
+
+            // Read the grid input
             for (int i = 0; i < n; i++) {
-                String[] S = br.readLine().trim().split(" ");
                 for (int j = 0; j < m; j++) {
-                    grid[i][j] = S[j].charAt(0);
+                    grid[i][j] = scanner.next().charAt(0);
                 }
             }
             Solution obj = new Solution();
-            int ans = obj.numIslands(grid);
+            int ans = obj.countIslands(grid);
             System.out.println(ans);
+            System.out.println("~");
         }
+        scanner.close();
     }
 }
+
 // } Driver Code Ends
 
-
- //
-//here
 class Solution {
-    void dfs(int i,int j, char arr[][], int dir[][]){
-        if(i<0 || j<0 || i>=arr.length || j>=arr[0].length || arr[i][j]-'0'==0)return ;
- 
-        arr[i][j]='0';
-        for(int k=0;k<dir.length;k++){
-            int x=i+dir[k][0];
-            int y=j+dir[k][1];
-            dfs(x,y,arr,dir);
+    public static void dfs(char[][] grid, int x, int y, boolean[][] visited) {
+        int[] dx = { -1, -1, -1, 0, 1, 1, 1, 0 };
+        int[] dy = { -1, 0, 1, 1, 1, 0, -1, -1 };
+
+        visited[x][y] = true;
+
+        for (int dir = 0; dir < 8; dir++) {
+            int newX = x + dx[dir];
+            int newY = y + dy[dir];
+
+            if (newX >= 0 && newY >= 0 && newX < grid.length && newY < grid[0].length &&
+                    !visited[newX][newY] && grid[newX][newY] == 'L') {
+                dfs(grid, newX, newY, visited);
+            }
         }
     }
-    
-  
-    public int numIslands(char[][] arr) {
-        int cnt=0;
-        int n=arr.length;
-        int m=arr[0].length;
-        int dir[][]={{-1,0},{-1,1},{0,1},{1,1},{1,0},{1,-1},{0,-1},{-1,-1}};
-        
-        for(int i=0;i<n;i++){
-            for(int j=0;j<m;j++){
-                if(arr[i][j]-'0'==1){
-                    dfs(i,j,arr, dir);
-                    cnt++;
+
+    public static int countIslands(char[][] grid) {
+        int n = grid.length;
+        int m = grid[0].length;
+        boolean[][] visited = new boolean[n][m];
+        int count = 0;
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if (!visited[i][j] && grid[i][j] == 'L') {
+                    dfs(grid, i, j, visited);
+                    count++;
                 }
             }
         }
-        return cnt;        
+
+        return count;
     }
 }
+
