@@ -10,7 +10,7 @@ public class Solution {
         }
 
         // If total is odd, partition is not possible
-        if ((total & 1) == 1) return false;
+        if (total %2 == 1) return false;
 
         int target = total / 2;
         int[][] dp = new int[N][target + 1];
@@ -32,6 +32,6 @@ public class Solution {
 
         dp[index][target] = (incl || excl) ? 1 : 0;
 
-        return dp[index][target] == 1;
+        return (incl || excl);
     }
 }
