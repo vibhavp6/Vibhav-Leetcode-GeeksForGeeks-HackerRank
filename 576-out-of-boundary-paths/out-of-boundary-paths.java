@@ -1,20 +1,16 @@
 class Solution {
-    int MOD = 1_000_000_007;
-    int[][][] dp;
-    int m, n;
-
     public int findPaths(int m, int n, int maxMove, int startRow, int startColumn) {
-        this.m = m;
-        this.n = n;
-        dp = new int[m][n][maxMove + 1];
+        int MOD = 1_000_000_007;
+        int[][][] dp = new int[m][n][maxMove + 1];
+        
         for (int[][] layer : dp)
             for (int[] row : layer)
                 Arrays.fill(row, -1);
 
-        return countPaths(startRow, startColumn, maxMove);
+        return countPaths(startRow, startColumn, maxMove, m, n, dp, MOD);
     }
 
-    private int countPaths(int i, int j, int movesLeft) {
+    private int countPaths(int i, int j, int movesLeft, int m, int n, int[][][] dp, int MOD) {
         if (i < 0 || j < 0 || i >= m || j >= n)
             return 1;
         if (movesLeft == 0)
@@ -23,11 +19,10 @@ class Solution {
             return dp[i][j][movesLeft];
 
         int total = 0;
-
-        total = (total + countPaths(i + 1, j, movesLeft - 1)) % MOD;
-        total = (total + countPaths(i - 1, j, movesLeft - 1)) % MOD;
-        total = (total + countPaths(i, j + 1, movesLeft - 1)) % MOD;
-        total = (total + countPaths(i, j - 1, movesLeft - 1)) % MOD;
+        total = (total + countPaths(i + 1, j, movesLeft - 1, m, n, dp, MOD)) % MOD;
+        total = (total + countPaths(i - 1, j, movesLeft - 1, m, n, dp, MOD)) % MOD;
+        total = (total + countPaths(i, j + 1, movesLeft - 1, m, n, dp, MOD)) % MOD;
+        total = (total + countPaths(i, j - 1, movesLeft - 1, m, n, dp, MOD)) % MOD;
 
         dp[i][j][movesLeft] = total;
         return total;
