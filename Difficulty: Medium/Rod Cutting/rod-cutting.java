@@ -31,7 +31,7 @@ class Solution {
 
     int solve(int[] price, int targetLen) {
         if (targetLen == 0) return 0;
-        
+        if (targetLen < 0) return -1;
         if (dp[targetLen] != -1) return dp[targetLen];
 
         int maxProfit = Integer.MIN_VALUE;
