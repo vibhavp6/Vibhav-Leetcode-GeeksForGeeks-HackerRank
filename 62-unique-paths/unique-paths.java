@@ -4,7 +4,10 @@ class Solution {
         if (i == m-1 || j == n-1) return 1;
         if (i == m-1 && j == n-1) return 0;
         if(dp [i][j] != -1) return dp[i][j];
-        return dp[i][j] = solve(m , n , i+1 , j, dp) + solve(m, n , i , j+1 , dp);
+        int solve = 0 ;
+        solve = solve + solve(m , n , i+1 , j, dp);
+        solve = solve + solve(m, n , i , j+1 , dp);
+        return dp[i][j] = solve;
     }
     public int uniquePaths(int m, int n) {
         int [][]dp  = new int [m][n];
