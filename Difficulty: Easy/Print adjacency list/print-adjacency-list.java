@@ -59,26 +59,21 @@ class GFG {
 
 
 // User function Template for Java
-
 class Solution {
     public List<List<Integer>> printGraph(int V, int edges[][]) {
-        // Create an adjacency list
-        List<List<Integer>> adj = new ArrayList<>();
-
-        // Initialize the adjacency list with empty lists for each node
-        for (int i = 0; i < V; i++) {
-            adj.add(new ArrayList<>());
-        }
-
-        // Iterate through the edges and populate the adjacency list
-        for (int i = 0; i < edges.length; i++) {
-            int x = edges[i][0]; // Start node of the edge
-            int y = edges[i][1]; // End node of the edge
-
-            adj.get(x).add(y); // Add y to x's adjacency list
-            adj.get(y).add(x); // Add x to y's adjacency list for undirected graph
-        }
-        return adj;
+        List<List<Integer>> adj = new ArrayList<>(V);
+        // Initialize the adjacency list
+            for (int i = 0; i < V; i++) {
+                adj.add(new ArrayList<>());
+            }
+            for (int i = 0; i<edges.length; i++) {
+                int u = edges[i][0];
+                int v = edges [i][1];
+                
+                adj.get(u).add(v);
+                adj.get(v).add(u);
+            }
+            
+            return adj;
     }
 }
-
