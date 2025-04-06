@@ -30,47 +30,41 @@ class GFG {
 
 // User function Template for Java
 
+
+
 class Solution {
-    public int solve(int [][] arr , int i , int precol ,  int [][] dp) {
+    public int solve(int[][] arr, int i, int precol, int[][] dp) {
         int n = arr.length;
         int m = arr[0].length;
-        if(i >= n || precol>= m) return 0;
-        if(dp[i][precol] != -1) return dp[i][precol];
-        int op1 = Integer.MIN_VALUE;
-        int op2 = Integer.MIN_VALUE;
-        if(precol == 0) {
-            op1 = arr[i][1]  + solve(arr , i+1 , 1 , dp);
-            op2 = arr[i][2] + solve(arr , i+1 , 2, dp);
-            
+        if (i >= n) {
+            return 0;
         }
-        if(precol == 1) {
-            op1 = arr[i][0]  + solve(arr , i+1 , 0 , dp);
-            op2 = arr[i][2] + solve(arr , i+1 , 2, dp);
-            
+        if (dp[i][precol] != -1) {
+            return dp[i][precol];
         }
-        if(precol == 2) {
-            op1 = arr[i][0]  + solve(arr , i+1 , 0 , dp);
-            op2 = arr[i][1] + solve(arr , i+1 , 1, dp);
-            
+        int maxVal = 0;
+        for (int j = 0; j < m; j++) {
+            if (j != precol) {
+                int current = arr[i][j] + solve(arr, i + 1, j, dp);
+                maxVal = Math.max(maxVal, current);
+            }
         }
-        
-        return dp[i][precol] = Math.max(op1 , op2);
+        return dp[i][precol] = maxVal;
     }
-    public int maximumPoints(int arr[][]) {
-        // code here
+
+    public int maximumPoints(int[][] arr) {
         int n = arr.length;
+        if (n == 0) return 0;
         int m = arr[0].length;
-        int [][] dp  = new int [n][m];
-        for (int [] row: dp){
+        if (m == 0) return 0;
+        int[][] dp = new int[n][m];
+        for (int[] row : dp) {
             Arrays.fill(row, -1);
         }
-         
-        int ans = -1;
-        
-        for(int j = 0; j < 3; j++){
-            ans = Math.max(ans, solve(arr, 0, j,dp));
+        int ans = 0;
+        for (int j = 0; j < m; j++) {
+            ans = Math.max(ans, solve(arr, 0, j, dp));
         }
-        
         return ans;
     }
 }
