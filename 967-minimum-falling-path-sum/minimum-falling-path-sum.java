@@ -1,7 +1,7 @@
 class Solution {
     public int solve(int [][] matrix , int n  , int i , int j , int [][] dp) {
         if(i == n-1) return matrix[i][j]; // ✅ Base case
-
+        if(i >=  n) return Integer.MAX_VALUE;
         if(dp[i][j] != Integer.MAX_VALUE) return dp[i][j];
 
         int op1 = matrix[i][j] + solve(matrix , n, i+1, j, dp);
