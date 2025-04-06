@@ -1,28 +1,35 @@
 class Solution {
-    public int findPaths(int m, int n, int N, int x, int y) {
-        final int M = 1000000000 + 7;
-        int[][] dp = new int[m][n];
-        dp[x][y] = 1;
-        int count = 0;
+    int MOD = 1_000_000_007;
+    int[][][] dp;
+    int m, n;
 
-        for (int moves = 1; moves <= N; moves++) {
-            int[][] temp = new int[m][n];
+    public int findPaths(int m, int n, int maxMove, int startRow, int startColumn) {
+        this.m = m;
+        this.n = n;
+        dp = new int[m][n][maxMove + 1];
+        for (int[][] layer : dp)
+            for (int[] row : layer)
+                Arrays.fill(row, -1);
 
-            for (int i = 0; i < m; i++) {
-                for (int j = 0; j < n; j++) {
-                    if (i == m - 1) count = (count + dp[i][j]) % M;
-                    if (j == n - 1) count = (count + dp[i][j]) % M;
-                    if (i == 0) count = (count + dp[i][j]) % M;
-                    if (j == 0) count = (count + dp[i][j]) % M;
-                    temp[i][j] = (
-                            ((i > 0 ? dp[i - 1][j] : 0) + (i < m - 1 ? dp[i + 1][j] : 0)) % M +
-                            ((j > 0 ? dp[i][j - 1] : 0) + (j < n - 1 ? dp[i][j + 1] : 0)) % M
-                    ) % M;
-                }
-            }
-            dp = temp;
-        }
+        return countPaths(startRow, startColumn, maxMove);
+    }
 
-        return count;
+    private int countPaths(int i, int j, int movesLeft) {
+        if (i < 0 || j < 0 || i >= m || j >= n)
+            return 1;
+        if (movesLeft == 0)
+            return 0;
+        if (dp[i][j][movesLeft] != -1)
+            return dp[i][j][movesLeft];
+
+        int total = 0;
+
+        total = (total + countPaths(i + 1, j, movesLeft - 1)) % MOD;
+        total = (total + countPaths(i - 1, j, movesLeft - 1)) % MOD;
+        total = (total + countPaths(i, j + 1, movesLeft - 1)) % MOD;
+        total = (total + countPaths(i, j - 1, movesLeft - 1)) % MOD;
+
+        dp[i][j][movesLeft] = total;
+        return total;
     }
 }
