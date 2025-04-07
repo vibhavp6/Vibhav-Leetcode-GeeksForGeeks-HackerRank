@@ -8,11 +8,28 @@ class Solution {
             for(int j = 0; j<n; j++) {
                 if(grid[i][j] == '1' && (!vis[i][j])){
                     count++;
-                    bfs(grid , i , j , vis);
+                    dfs(grid , i , j , vis);
                 }
             }
         }
         return count;
+    }
+
+    public void dfs(char[][] grid , int i , int j , boolean [][] vis) {
+        int n = grid.length;
+        int m = grid[0].length;
+        if(i<0 || j<0 || i>=n || j>=m ){
+            return;
+        }
+        if(grid[i][j] == '0' || vis[i][j] == true) {
+            return;
+        }
+
+        vis[i][j] = true;
+        dfs(grid , i-1 , j , vis);
+        dfs(grid , i+1 , j , vis);
+        dfs(grid , i , j-1 , vis);
+        dfs(grid , i , j+1 , vis);
     }
 
     public void bfs(char [][] grid , int i , int j , boolean [][] vis) {
