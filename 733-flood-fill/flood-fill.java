@@ -1,39 +1,33 @@
-import java.util.*;
-
 class Solution {
     public int[][] floodFill(int[][] image, int sr, int sc, int color) {
-        int n = image.length;
-        int m = image[0].length;
         int originalColor = image[sr][sc];
-
-        // If the new color is the same as the original, no need to proceed
+        
+        // If the starting pixel already has the target color, no changes are needed.
         if (originalColor == color) {
             return image;
         }
+        
+        // Perform DFS to fill the connected region
+        dfs(image, sr, sc, originalColor, color);
+        return image;
+    }
 
-        Queue<int[]> queue = new LinkedList<>();
-        queue.offer(new int[]{sr, sc});
-        image[sr][sc] = color;
+    private void dfs(int[][] image, int i, int j, int originalColor, int color) {
+        int rows = image.length;
+        int cols = image[0].length;
 
-        // Directions for moving up, down, left, and right
-        int[][] directions = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
-
-        while (!queue.isEmpty()) {
-            int[] pos = queue.poll();
-            int x = pos[0];
-            int y = pos[1];
-
-            for (int[] dir : directions) {
-                int xx = x + dir[0];
-                int yy = y + dir[1];
-
-                if (xx >= 0 && xx < n && yy >= 0 && yy < m && image[xx][yy] == originalColor) {
-                    queue.offer(new int[]{xx, yy});
-                    image[xx][yy] = color;
-                }
-            }
+        // Boundary and base condition checks
+        if (i < 0 || i >= rows || j < 0 || j >= cols || image[i][j] != originalColor) {
+            return;
         }
 
-        return image;
+        // Change the color of the current pixel
+        image[i][j] = color;
+
+        // Perform DFS in all four directions
+        dfs(image, i - 1, j, originalColor, color); // Up
+        dfs(image, i + 1, j, originalColor, color); // Down
+        dfs(image, i, j - 1, originalColor, color); // Left
+        dfs(image, i, j + 1, originalColor, color); // Right
     }
 }
