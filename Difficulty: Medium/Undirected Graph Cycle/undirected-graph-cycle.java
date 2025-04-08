@@ -27,36 +27,57 @@ class GFG {
 
 // } Driver Code Ends
 
+
 class Solution {
     public boolean isCycle(int V, int[][] edges) {
         // Code here
-        int[] parent = new int[V];
-        for(int i=0; i<V; i++){
-            parent[i] = i;
+        List<List<Integer>> adj = new ArrayList<>();
+        for(int i =0 ; i<V; i++){
+            adj.add(new ArrayList<>());
         }
         
-        for(int[] edge : edges){
-            int u = edge[0];
-            int v = edge[1];
-            int parentU = find(parent, u);
-            int parentV = find(parent, v);
-            
-            if(parentU == parentV){
-                return true;
+        for(int i = 0; i<edges.length; i++) {
+                int u = edges[i][0];
+                int v = edges[i][1];
+                adj.get(u).add(v);
+                adj.get(v).add(u);
+        }
+        
+        boolean [] vis = new boolean[V];
+        for(int i = 0; i<V; i++) {
+            if(!vis[i]){
+                if(bfs(adj, i, vis) == true){
+                    return true;
+                }
             }
-            union(parent, parentU, parentV);
         }
         return false;
     }
     
-    private int find(int[] parent, int vertex){
-        if(parent[vertex] != vertex){
-            parent[vertex] = find(parent, parent[vertex]);
+    public boolean bfs(List<List<Integer>> adj, int i, boolean[] vis){
+        Queue<int[]> q = new LinkedList<>();
+        
+        q.add(new int[]{i, -1});
+        
+        vis[i] = true;
+        
+        while(!q.isEmpty()){
+            int[] node = q.poll();
+            
+            int x = node[0];
+            int y = node[1];
+            
+            for(Integer ngh : adj.get(x)){
+                if(!vis[ngh]){
+                    q.add(new int[]{ngh, x});
+                    vis[ngh] = true;
+                }
+                else if(ngh != y){
+                    return true;
+                }
+            }
         }
-        return parent[vertex];
-    }
-    
-    private void union(int[] parent, int u, int v){
-        parent[u] = v;
+        
+        return false;
     }
 }
