@@ -27,35 +27,50 @@ class GFG {
 
 class Solution {
     public boolean isCyclic(int V, int[][] edges) {
-        List<List<Integer>> graph = new ArrayList<>() ; 
-        int[] indegree = new int[V] ; 
-        for(int i = 0 ; i < V ; i++){
-            graph.add(new ArrayList<>()); 
+        // Step 1: Create adjacency list
+        List<List<Integer>> adj = new ArrayList<>();
+        for (int i = 0; i < V; i++) {
+            adj.add(new ArrayList<>());
         }
-        for(int i = 0 ; i < edges.length ; i++){
-            int u = edges[i][0] ; 
-            int v = edges[i][1] ; 
-            graph.get(u).add(v) ; 
-            indegree[v]++ ;
+
+        // Step 2: Fill adjacency list from edges
+        for (int[] edge : edges) {
+            int u = edge[0]; // from
+            int v = edge[1]; // to
+            adj.get(u).add(v); // directed edge from u to v
         }
-        Queue<Integer> q = new LinkedList<>() ; 
-        for(int i = 0 ; i < V ; i++){
-            if(indegree[i] == 0){
-                q.offer(i); 
+
+        // Step 3: Calculate indegree of all nodes
+        int[] indegree = new int[V];
+        for (int u = 0; u < V; u++) {
+            for (int v : adj.get(u)) {
+                indegree[v]++;
             }
         }
-        List<Integer> result = new ArrayList<>() ; 
-        while(!q.isEmpty()){
-            int node = q.poll() ; 
-            result.add(node) ;
-            for(int nbr : graph.get(node)){
-                indegree[nbr]-- ; 
-                if(indegree[nbr] == 0){
-                    q.offer(nbr) ; 
+
+        // Step 4: Push all nodes with indegree 0 to queue
+        Queue<Integer> queue = new LinkedList<>();
+        for (int i = 0; i < V; i++) {
+            if (indegree[i] == 0) {
+                queue.add(i);
+            }
+        }
+
+        // Step 5: Do BFS (Topological Sort)
+        int count = 0;
+        while (!queue.isEmpty()) {
+            int node = queue.poll();
+            count++;
+
+            for (int neighbor : adj.get(node)) {
+                indegree[neighbor]--;
+                if (indegree[neighbor] == 0) {
+                    queue.add(neighbor);
                 }
             }
         }
-        return result.size() != V ; 
-        
+
+        // Step 6: If all nodes are not processed, cycle exists
+        return count != V;
     }
 }
