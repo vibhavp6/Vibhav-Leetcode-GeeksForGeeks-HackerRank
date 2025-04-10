@@ -85,63 +85,77 @@ class GFG {
 // } Driver Code Ends
 
 
-// User function Template for Java
-/*
-class Node
-{
-    int data;
-    Node left, right;
 
-    public Node(int d)
-    {
-        data = d;
-        left = right = null;
-    }
-}
-*/
+
+//User function Template for Java
+
+// class Node  
+// { 
+//     int data; 
+//     Node left, right; 
+   
+//     public Node(int d)  
+//     { 
+//         data = d; 
+//         left = right = null; 
+//     } 
+// }
+
+
 class Solution {
-    public void leftBoundaryVisit(Node node, ArrayList<Integer> list){
-        while(node!=null){
-            if(node.left!=null || node.right!=null){
-                list.add(node.data);
-            }
-            node = (node.left!=null)?node.left : node.right;
+
+    public static boolean isLeaf(Node root) {
+        return (root.left == null && root.right == null);
+    }
+
+    public static void addLeftNode(Node node, ArrayList<Integer> al) {
+        Node temp = node;
+        while (temp != null) {
+            if (!isLeaf(temp))
+                al.add(temp.data);
+            if (temp.left != null)
+                temp = temp.left;
+            else
+                temp = temp.right;
         }
     }
-      public void rightBoundaryVisit(Node node, ArrayList<Integer> list){
-          Stack<Integer> st = new Stack<>();
-        while(node!=null){
-            if(node.left!=null || node.right!=null){
-               st.push(node.data);
-            }
-            node = (node.right!=null)?node.right : node.left;
+
+    public static void addRootNode(Node root, ArrayList<Integer> al) {
+        if (isLeaf(root)) {
+            al.add(root.data);
+            return;
         }
-        while(!st.isEmpty()){
-            list.add(st.pop());
-        }
+        if (root.left != null)
+            addRootNode(root.left, al);
+        if (root.right != null)
+            addRootNode(root.right, al);
     }
-    
-    public void inorderVisitForLeafNode(Node node, ArrayList<Integer> list){
-        if(node==null){return;}
-        inorderVisitForLeafNode(node.left, list);
-        if(node.left==null && node.right ==null){
-            list.add(node.data);
+
+    public static void addRightNode(Node node, ArrayList<Integer> al) {
+        Node temp = node;
+        ArrayList<Integer> res = new ArrayList<>();
+        while (temp != null) {
+            if (!isLeaf(temp))
+                res.add(temp.data);
+            if (temp.right != null)
+                temp = temp.right;
+            else
+                temp = temp.left;
         }
-        inorderVisitForLeafNode(node.right,list);
+        for (int i = res.size() - 1; i >= 0; i--)
+            al.add(res.get(i));
     }
-    
+
+    // ✅ Renamed this method as per standard GFG requirement
     ArrayList<Integer> boundaryTraversal(Node node) {
-        // code here
-        
-        ArrayList<Integer> result  = new ArrayList<>();
-        if(node == null) return result;
-        
-        result.add(node.data);
-        leftBoundaryVisit(node.left, result);
-        inorderVisitForLeafNode(node.left, result);
-        inorderVisitForLeafNode(node.right, result);
-        rightBoundaryVisit(node.right, result);
-        
-        return result;
+        ArrayList<Integer> al = new ArrayList<>();
+        if (!isLeaf(node))
+            al.add(node.data);
+        if (node.left != null)
+            addLeftNode(node.left, al);
+        addRootNode(node, al);
+        if (node.right != null)
+            addRightNode(node.right, al);
+        return al;
     }
 }
