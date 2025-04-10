@@ -17,7 +17,7 @@ class Solution {
 
         // Mark the current cell as visited by setting grid2[i][j] to 0
         grid2[i][j] = 0;
-
+        grid1[i][j] = 0;
         // Continue the DFS in all four directions
         dfs(grid1, grid2, i + 1, j);  // Down
         dfs(grid1, grid2, i - 1, j);  // Up
