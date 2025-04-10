@@ -35,7 +35,7 @@ class Solution {
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
                 // If the cell is land in grid2, it could be part of a sub-island
-                if (grid2[i][j] == 1) {
+                if (grid2[i][j] == 1 && grid1[i][j] == 1) {
                     isSubIsland = true;  // Start assuming this is a sub-island
                     dfs(grid1, grid2, i, j);  // Perform DFS to check the whole island
 
