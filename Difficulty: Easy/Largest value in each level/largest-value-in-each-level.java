@@ -105,13 +105,17 @@ class Tree {
         	
                 t--;
             
-        }
+        
+System.out.println("~");
+}
     }
 }
 
 
 
 // } Driver Code Ends
+
+
 
 
 //User function Template for Java
@@ -125,13 +129,13 @@ class Solution
         q.add(root);
         ArrayList<Integer> arr = new ArrayList<>();
         if (root == null) return arr;
-        Node temp;
+        
         while(!q.isEmpty()){
             int size  = q .size();
             int maxval = Integer.MIN_VALUE; 
             
             for (int i = 0; i<size; i++) {
-                temp = q.poll();
+                Node temp = q.poll();
                 maxval = Math.max( maxval , temp.data);
                 if (temp.left != null) q.add(temp.left);
                 if (temp.right != null) q.add(temp.right);
