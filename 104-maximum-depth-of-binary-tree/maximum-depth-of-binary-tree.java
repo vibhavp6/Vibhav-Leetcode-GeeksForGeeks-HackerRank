@@ -15,6 +15,10 @@
  */
 class Solution {
     public int maxDepth(TreeNode root) {
+        int ans = maxs(root);
+        return ans;
+    }
+    public int maxs(TreeNode root) {
         if(root  == null) return 0;
 
         if(root.left == null && root.right == null) return 1 ;
