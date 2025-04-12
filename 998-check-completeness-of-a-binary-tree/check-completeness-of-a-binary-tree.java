@@ -23,7 +23,7 @@ class Solution {
         TreeNode temp = q.poll();
         if(temp == null) flag = true;
         else if(flag == true) {
-            return false;
+            return false; // ek level me agr ek null node agyi hai toh dubara koi non null node nahi ayegi (in a complete binary tree)
         }else{
             q.add(temp.left);
             q.add(temp.right);
