@@ -1,87 +1,146 @@
 //{ Driver Code Starts
-//Initial Template for Java
+// Initial Template for Java
 
-import java.util.*;
 import java.io.*;
-class Node{
+import java.util.*;
+import java.util.LinkedList;
+import java.util.Queue;
+
+class Node {
     int data;
-    Node left,right;
-    Node(int d){
-        data=d;
-        left=right=null;
+    Node left;
+    Node right;
+
+    Node(int data) {
+        this.data = data;
+        left = null;
+        right = null;
     }
-}
-class GfG{
-    
-    public static void main(String[] args)throws IOException{
-        //Scanner sc=new Scanner(System.in);
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        
-        int t=Integer.parseInt(br.readLine());
-       
-        while(t > 0){
-            Queue<Node> q = new LinkedList<>();
-        
-            int n = Integer.parseInt(br.readLine());
-            String input[] = br.readLine().trim().split(" ");
-            
-            Node root = null;
-            int j=0;
-            while(n > 0){
-            int a1 = Integer.parseInt(input[j]);
-            int a2 = Integer.parseInt(input[j+1]);
-            char lr = input[j+2].charAt(0);
-            j+=3;
-            
-            if(root == null)
-            {
-                root = new Node(a1);
-                q.add(root);
-            }
-            
-            Node pick = q.peek();
-            
-            q.remove();
-            
-            if(lr=='L'){
-                pick.left = new Node(a2);
-                q.add(pick.left);
-            }
-            a1 = Integer.parseInt(input[j]);
-            a2 = Integer.parseInt(input[j+1]);
-            lr = input[j+2].charAt(0);
-            j += 3;
-            
-            if(lr=='R'){
-                pick.right = new Node(a2);
-                q.add(pick.right);
-            }
-            
-            n-=2;
-        }
-        System.out.println(BinaryTree.sumBT(root));
-            t--;
-            
-        }
-    }
-   
 }
 
+class GfG {
+
+    static Node buildTree(String str) {
+
+        if (str.length() == 0 || str.charAt(0) == 'N') {
+            return null;
+        }
+
+        String ip[] = str.split(" ");
+        // Create the root of the tree
+        Node root = new Node(Integer.parseInt(ip[0]));
+        // Push the root to the queue
+
+        Queue<Node> queue = new LinkedList<>();
+
+        queue.add(root);
+        // Starting from the second element
+
+        int i = 1;
+        while (queue.size() > 0 && i < ip.length) {
+
+            // Get and remove the front of the queue
+            Node currNode = queue.peek();
+            queue.remove();
+
+            // Get the current node's value from the string
+            String currVal = ip[i];
+
+            // If the left child is not null
+            if (!currVal.equals("N")) {
+
+                // Create the left child for the current node
+                currNode.left = new Node(Integer.parseInt(currVal));
+                // Push it to the queue
+                queue.add(currNode.left);
+            }
+
+            // For the right child
+            i++;
+            if (i >= ip.length) break;
+
+            currVal = ip[i];
+
+            // If the right child is not null
+            if (!currVal.equals("N")) {
+
+                // Create the right child for the current node
+                currNode.right = new Node(Integer.parseInt(currVal));
+
+                // Push it to the queue
+                queue.add(currNode.right);
+            }
+            i++;
+        }
+
+        return root;
+    }
+
+    void inOrder(Node node) {
+        if (node == null) {
+            return;
+        }
+
+        inOrder(node.left);
+        System.out.print(node.data + " ");
+
+        inOrder(node.right);
+    }
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        int t = Integer.parseInt(br.readLine());
+
+        while (t-- > 0) {
+            String s = br.readLine();
+            Node root = buildTree(s);
+            Solution g = new Solution();
+            int result = g.sumBT(root);
+            System.out.println(result);
+
+            System.out.println("~");
+        }
+    }
+}
 
 // } Driver Code Ends
 
 
-//User function Template for Java
+// User function Template for Java
 
-
-
-class BinaryTree
+/*
+// A Binary Tree node
+class Node
 {
-    static int sumBT(Node head){
-        //Code
-        if (head == null) return 0;
-        return sumBT(head.left) + sumBT(head.right) + head.data;
-        
+    int data;
+    Node left, right;
+
+    Node(int item)
+    {
+        data = item;
+        left = right = null;
     }
-    
+}
+*/
+
+class Solution {
+    static int sum = 0;
+
+    static void preOrder(Node root){
+        if(root == null) return;
+
+        sum += root.data;
+
+        preOrder(root.left);
+        preOrder(root.right);
+    }
+
+    static int sumBT(Node root) {
+        sum = 0;
+        
+        preOrder(root);
+        
+        return sum;
+    }
 }
