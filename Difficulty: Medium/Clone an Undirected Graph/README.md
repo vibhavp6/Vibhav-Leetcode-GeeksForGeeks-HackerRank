@@ -1,0 +1,16 @@
+<h2><a href="https://www.geeksforgeeks.org/problems/clone-graph/1">Clone an Undirected Graph</a></h2><h3>Difficulty Level : Difficulty: Medium</h3><hr><div class="problems_problem_content__Xm_eO"><p><span style="font-size: 14pt;">Given a <strong>connected undirected graph </strong>represented by adjacency list, <strong>adjList[][] </strong>with <strong>n </strong>nodes,&nbsp;having a <strong>distinct label </strong>from <strong>0 to n-1</strong>, where </span><span style="font-size: 14pt;">each <strong>adj[i]</strong> represents the list of vertices connected to vertex i.</span></p>
+<p><span style="font-size: 14pt;">Create a <strong>clone </strong>of the graph, where each node in the graph contains an integer <strong>val</strong> and an array (<strong>neighbors</strong>) of nodes,<strong>&nbsp;</strong>containing nodes that are adjacent to the current node.</span></p>
+<pre><span style="font-size: 18.6667px;">class Node {
+    val: integer
+    neighbors: List[Node]
+}</span></pre>
+<p><span style="font-size: 14pt;">Your task is to complete the function <strong>cloneGraph( )&nbsp;</strong>which takes a starting node of the graph as input and returns the <strong>copy of the given node</strong> as a reference to the cloned graph.</span></p>
+<p><span style="font-size: 14pt;"><strong>Note:&nbsp;</strong>If you return a <strong>correct copy </strong>of the given graph, then the driver code will print <strong>true</strong>; and if an incorrect copy is generated or when you return the original node, the driver code will print <strong>false</strong>.</span></p>
+<p><span style="font-size: 14pt;"><strong>Examples :</strong></span></p>
+<pre><span style="font-size: 14pt;"><strong>Input: </strong>n = 4, adjList[][] = [[1, 2], [0, 2], [0, 1, 3], [2]]
+<strong>Output: </strong>true
+<strong>Explanation: <br><img src="https://media.geeksforgeeks.org/img-practice/prod/addEditProblem/893038/Web/Other/blobid0_1744464094.jpg" width="211" height="190"><br></strong>As the cloned graph is identical to the original one the driver code will print true.</span></pre>
+<pre><span style="font-size: 14pt;"><strong>Input: </strong>n = 3, adjList[][] = [[1, 2], [0], [0]]
+<strong>Output: </strong>true
+<strong>Explanation: <br><img src="https://media.geeksforgeeks.org/img-practice/prod/addEditProblem/893038/Web/Other/blobid1_1744465861.jpg" width="233" height="206"><br></strong>As the cloned graph is identical to the original one the driver code will print true.<br></span></pre>
+<p><span style="font-size: 14pt;"><strong>Constraints:</strong><br>1 ≤ n ≤ 10<sup>4<br></sup></span><span style="font-size: 14pt;">0&nbsp;</span><span style="font-size: 18.6667px;">≤ no. of edges&nbsp;</span><span style="font-size: 18.6667px;">≤ 10<sup>5</sup><br></span><span style="font-size: 14pt;">0 ≤ adjList[i][j] &lt; n</span></p></div><p><span style=font-size:18px><strong>Company Tags : </strong><br><code>Google</code>&nbsp;<br><p><span style=font-size:18px><strong>Topic Tags : </strong><br><code>Graph</code>&nbsp;<code>DFS</code>&nbsp;<code>BFS</code>&nbsp;
