@@ -22,6 +22,8 @@
  */
 
 
+import java.util.*;
+
 class Solution {
     public int widthOfBinaryTree(TreeNode root) {
         if (root == null) return 0;
@@ -32,25 +34,20 @@ class Solution {
         long maxWidth = 0;
 
         while (!queue.isEmpty()) {
-            int size = queue.size();
-            long minIndex = queue.peek().getValue();
-            long first = 0, last = 0;
+            int n = queue.size();
+            long f = queue.peek().getValue();
+            long l = ((LinkedList<Pair<TreeNode, Long>>) queue).peekLast().getValue();
 
-            for (int i = 0; i < size; i++) {
+            maxWidth = Math.max(maxWidth, l - f + 1);
+
+            while (n-- > 0) {
                 Pair<TreeNode, Long> current = queue.poll();
-                TreeNode node = current.getKey();
-                long index = current.getValue() - minIndex;
+                TreeNode curr = current.getKey();
+                long d = current.getValue();
 
-                if (i == 0) first = index;
-                if (i == size - 1) last = index;
-
-                if (node.left != null)
-                    queue.offer(new Pair<>(node.left, 2 * index + 1));
-                if (node.right != null)
-                    queue.offer(new Pair<>(node.right, 2 * index + 2));
+                if (curr.left != null) queue.offer(new Pair<>(curr.left, 2 * d + 1));
+                if (curr.right != null) queue.offer(new Pair<>(curr.right, 2 * d + 2));
             }
-
-            maxWidth = Math.max(maxWidth, last - first + 1);
         }
 
         return (int) maxWidth;
