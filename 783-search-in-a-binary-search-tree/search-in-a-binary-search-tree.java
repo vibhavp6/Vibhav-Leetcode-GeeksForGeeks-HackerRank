@@ -14,20 +14,31 @@
  * }
  */
 class Solution {
-    public TreeNode InOrder(TreeNode root, int val){
-        if(root == null) return null;
-        if(root.val == val) return root;
+    // public TreeNode InOrder(TreeNode root, int val){
+    //     if(root == null) return null;
+    //     if(root.val == val) return root;
 
 
-        TreeNode left = InOrder(root.left, val);
-        TreeNode right = InOrder(root.right, val);
+    //     TreeNode left = InOrder(root.left, val);
+    //     TreeNode right = InOrder(root.right, val);
 
-        if(left != null) return left; 
+    //     if(left != null) return left; 
 
-        return right;
+    //     return right;
  
-    }
+    // }
     public TreeNode searchBST(TreeNode root, int val) {
-        return InOrder(root, val);
+        //return InOrder(root, val);
+        TreeNode temp = root;
+        while(temp!= null) {
+            if(temp.val == val){
+                return temp;
+            } else if(temp.val > val){
+                temp = temp.left;
+            } else{
+                temp = temp.right;
+            }
+        }
+        return null;
     }
 }
