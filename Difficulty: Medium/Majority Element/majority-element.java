@@ -14,6 +14,7 @@ class Geeks {
             int arr[] = new int[str.length];
             for (int i = 0; i < str.length; i++) arr[i] = Integer.parseInt(str[i]);
             System.out.println(new Solution().majorityElement(arr));
+            System.out.println("~");
         }
     }
 }
@@ -24,21 +25,13 @@ class Geeks {
 
 class Solution {
     static int majorityElement(int arr[]) {
-        // your code here
-        HashMap <Integer , Integer> ss = new HashMap <>();
-        int vibb  = -1 ;
+        // code here
         int n = arr.length;
-        for (int num : arr) {
-            ss.put(num , ss.getOrDefault(num, 0) +1);
+        HashMap<Integer,Integer>hm = new HashMap();
+        for(int num:arr){
+            hm.put(num,hm.getOrDefault(num,0)+1);
+            if(hm.get(num)>n/2)return num;
         }
-        for (int num : arr) {
-            int temp = ss.get(num);
-            if (temp > n/2) {
-                vibb = num;
-                
-                break;
-            } 
-        }
-        return vibb;
+        return -1;
     }
 }
