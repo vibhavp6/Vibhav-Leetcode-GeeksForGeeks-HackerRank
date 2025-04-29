@@ -14,7 +14,6 @@ class Node {
 
 
 // } Driver Code Ends
-// User function Template for Java
 
 /*
 class Node
@@ -28,44 +27,57 @@ class Node
     }
 }
 */
-class Solution {
-    // Function to sort a linked list of 0s, 1s, and 2s
-    static Node segregate(Node head) {
-        if (head == null || head.next == null) return head;
-
-        // Creating dummy nodes for 0s, 1s, and 2s
-        Node zeroDummy = new Node(0);
-        Node oneDummy = new Node(0);
-        Node twoDummy = new Node(0);
-
-        // Pointers to the last nodes of 0s, 1s, and 2s lists
-        Node zero = zeroDummy, one = oneDummy, two = twoDummy;
-        Node current = head;
-
-        // Traverse the original list and distribute nodes into 0s, 1s, and 2s lists
-        while (current != null) {
-            if (current.data == 0) {
-                zero.next = current;
-                zero = zero.next;
-            } else if (current.data == 1) {
-                one.next = current;
-                one = one.next;
-            } else {
-                two.next = current;
-                two = two.next;
+class Solution
+{
+    //Function to sort a linked list of 0s, 1s and 2s.
+    static Node segregate(Node head)
+    {
+        // add your code here
+        int count0 = 0 ;
+        int count1 = 0 ;
+        int count2 = 0 ;
+        
+        Node temp = head;
+        
+        while(temp != null ) {
+            if(temp.data == 0) {
+                count0++;
+            }else if(temp.data == 1) {
+                count1++;
+            }else{
+                count2++;
             }
-            current = current.next;
+         temp = temp.next;
         }
-
-        // Connect the three lists
-        zero.next = (oneDummy.next != null) ? oneDummy.next : twoDummy.next;
-        one.next = twoDummy.next;
-        two.next = null;
-
-        // The new head is the next node of zeroDummy
-        return zeroDummy.next;
+        
+        temp = head;
+        
+        while(temp != null) {
+            if(count0 > 0){
+                temp.data = 0;
+                temp = temp.next;
+                count0--;
+                continue;
+            }
+            if(count1 > 0){
+                temp.data = 1;
+               temp = temp.next;
+                count1--;
+                continue;
+            }
+            if(count2 > 0){
+                temp.data = 2;
+               temp = temp.next;
+                count2--;
+                continue;
+            }
+        }
+     return head;
     }
 }
+
+
+
 
 
 //{ Driver Code Starts.
@@ -102,6 +114,7 @@ class GFG {
             }
             head = new Solution().segregate(head);
             printList(head);
+            System.out.println("~");
         }
     }
 }
