@@ -131,8 +131,6 @@ class GFG {
 // } Driver Code Ends
 
 
-
-
 /*
 
 Definition for Binary Tree Node
@@ -153,29 +151,26 @@ class Node
 
 class Solution {
     public static ArrayList<ArrayList<Integer>> Paths(Node root) {
-        // code here
         ArrayList<ArrayList<Integer>> ans = new ArrayList<>();
-        ArrayList<Integer> temp = new ArrayList<>();
-        
-        path(root,temp, ans);
-        
-        return ans;
+        ArrayList<Integer> path = new ArrayList<>();
+        solve(root, ans, path );
+        return ans; 
     }
-    
-    public static void path(Node root, ArrayList<Integer> temp, ArrayList<ArrayList<Integer>> ans){
-        if(root == null){
-            return;
-        }
+    public static void solve(Node root , ArrayList<ArrayList<Integer>> ans,
+    ArrayList<Integer> path){
+        if(root == null)
+            return ;
         
-        temp.add(root.data);
+        path.add(root.data);
         
         if(root.left == null && root.right == null){
-            ans.add(new ArrayList<>(temp));
+            ans.add(new ArrayList<>(path));
         }
         
-        if (root.left!= null ) path(root.left, temp, ans);
-        if (root.right!= null ) path(root.right, temp, ans);
-        temp.remove(temp.size()-1);
+         solve(root.left , ans, path);
+         solve(root.right , ans , path);
+         
+         //Backtrack
+         path.remove(path.size() - 1);
     }
 }
-        
