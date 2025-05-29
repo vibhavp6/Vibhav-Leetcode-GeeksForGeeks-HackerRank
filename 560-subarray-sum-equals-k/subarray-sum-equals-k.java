@@ -1,4 +1,3 @@
-
 class Solution {
     public int subarraySum(int[] nums, int goal) {
         int ans = 0;
