@@ -6,7 +6,7 @@ class Solution {
 
         // Set the row and col indices to true where 0 appears
         for(int i = 0; i < matrix.length; i++){
-            for(int j = 0; j < matrix[0].length; j++){
+            for(int j = 0; j < matrix[i].length; j++){
                 if(matrix[i][j] == 0){
                     row[i] = true;
                     column[j] = true;
@@ -16,7 +16,7 @@ class Solution {
 
         // Traverse again and set those indices to 0 where row or col indices are marked true
         for(int i = 0; i <matrix.length; i++){
-            for(int j =0; j <matrix[0].length; j++){
+            for(int j =0; j <matrix[i].length; j++){
                 if(row[i] || column[j]){
                     matrix[i][j] = 0;
                 }
