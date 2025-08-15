@@ -1,76 +1,39 @@
-//{ Driver Code Starts
-// Initial Template for Java
-
-import java.io.*;
-import java.lang.*;
-import java.math.*;
-import java.util.*;
-
-class GFG {
-    public static void main(String[] args) throws IOException {
-        Scanner sc = new Scanner(System.in);
-        int T = sc.nextInt();
-        while (T-- > 0) {
-            int n = sc.nextInt();
-            int a[][] = new int[n][2];
-            for (int i = 0; i < n; i++) {
-                a[i][0] = sc.nextInt();
-                a[i][1] = sc.nextInt();
-            }
-            int h[] = new int[2];
-            h[0] = sc.nextInt();
-            h[1] = sc.nextInt();
-            Solution obj = new Solution();
-            ArrayList<int[]> ans = obj.insertInterval(a, h);
-            System.out.print("[");
-            for (int i = 0; i < ans.size(); i++) {
-                System.out.print("[");
-                System.out.print(ans.get(i)[0] + "," + ans.get(i)[1]);
-                System.out.print("]");
-                if (i != ans.size() - 1) System.out.print(",");
-            }
-            System.out.println("]");
-
-            System.out.println("~");
-        }
-    }
-}
-
-// } Driver Code Ends
-
-
-// User function Template for Java
-
 class Solution {
-    static ArrayList<int[]> insertInterval(int[][] intervals, int[] newInterval) {
+    public ArrayList<int[]> insertInterval(int[][] intervals, int[] newInterval) {
         // code here
-        ArrayList<int[]> al=new ArrayList<>();
-        boolean added=false;
-        for(int i=0;i<intervals.length;i++)
+        ArrayList<int []> ll =new ArrayList<>();
+        boolean flag=true;
+        for(int [] item:intervals) 
         {
-            if(intervals[i][0]<newInterval[0]&&intervals[i][1]<newInterval[0])
+            if(newInterval[0]<item[0] && flag==true)
             {
-                al.add(intervals[i]);
+                ll.add(newInterval);
+                //ll.add(i)
+                flag=false;
             }
-            else if(intervals[i][0]>newInterval[1]&&intervals[i][1]>newInterval[1])
+            ll.add(item);
+        }
+        if(ll.size()==intervals.length) ll.add(newInterval);
+       // int min
+        ArrayList<int[]> ans=new ArrayList<>();
+        int minEnd=Integer.MIN_VALUE;
+       // for(int [] item: ll) System.out.println(item[0]+" "+item[1]);
+        for(int [] item:ll)
+        {
+            if(item[0]>minEnd)
             {
-                if(added==false)
-                {
-                    al.add(newInterval);
-                    added=true;
-                }
-                al.add(intervals[i]);
+                ans.add(item);
+                minEnd=item[1];
             }
-            else
-            {
-                newInterval[0]=Math.min(newInterval[0],intervals[i][0]);
-                newInterval[1]=Math.max(newInterval[1],intervals[i][1]);
+            else{
+                int [] arr=ans.get(ans.size()-1);
+              //  System.out.println(arr[0]+" "+arr[1]+" "+item[0]+" "+item[1]+" "+Math.max(item[1],arr[1]));
+                arr[1]=Math.max(item[1],arr[1]);
+                minEnd=Math.max(minEnd,item[1]);
             }
         }
-        if(added==false)
-        {
-            al.add(newInterval);
-        }
-        return al;
+        
+    //   for(int [] item: ans) System.out.println(item[0]+" "+item[1]);
+        return ans;
     }
 }
