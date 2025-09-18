@@ -1,24 +1,42 @@
 class Solution {
-    public ArrayList<Integer> nextLargerElement(int[] arr) {
+    public ArrayList<Integer> nextGreater(int[] arr) {
         // code here
         int n = arr.length;
-        ArrayList<Integer> result = new ArrayList<>();
-        Stack<Integer> stack = new Stack<>();      
-        // Initialize result with -1
-        for (int i = 0; i < n; i++) {
-            result.add(-1);
-        }        
-        // Traverse the circular array twice
-        for (int i = 0; i < 2 * n; i++) {
-            int current = arr[i % n];
-            while (!stack.isEmpty() && arr[stack.peek()] < current) {
-                result.set(stack.pop(), current);
-            }
-            if (i < n) {
-                stack.push(i);
+        
+        int max = -1, ind = -1;
+        for(int i =0; i < n; i++) {
+            if(arr[i] > max) {
+                max = arr[i];
+                ind = i;
             }
         }
-        return result;
+        
+        Stack<Integer> stk = new Stack<>();
+        stk.push(max);
+        ArrayList<Integer> ll = new ArrayList<>(Collections.nCopies(n, -1));
+        ll.set(ind, -1);
+        int i = ind -1;
+        while(i >= 0) {
+            while(!stk.isEmpty() && stk.peek() <= arr[i]) stk.pop();
+            int temp = arr[i];
+            if(!stk.isEmpty()) {
+                ll.set(i, stk.peek());
+            }
+            stk.push(arr[i]);
+            i--;
+        }
+        
+        i = n-1;
+        while(i > ind) {
+            while(!stk.isEmpty() && stk.peek() <= arr[i]) stk.pop();
+            int temp = arr[i];
+            if(!stk.isEmpty()) {
+                ll.set(i, stk.peek());
+            }
+            stk.push(arr[i]);
+            i--;
+        }
+        
+        return ll;
     }
 }
-
