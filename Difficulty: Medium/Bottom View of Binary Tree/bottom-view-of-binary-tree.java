@@ -1,161 +1,39 @@
-//{ Driver Code Starts
-//Initial Template for Java
+/*
+class Node {
+    int data;
+    Node left;
+    Node right;
 
-
-//Contributed by Sudarshan Sharma
-import java.util.LinkedList; 
-import java.util.Queue; 
-import java.io.*;
-import java.util.*;
-
-class Node
-{
-    int data; //data of the node
-    int hd; //horizontal distance of the node
-    Node left, right; //left and right references
- 
-    // Constructor of tree node
-    public Node(int key)
-    {
-        data = key;
-        hd = Integer.MAX_VALUE;
-        left = right = null;
+    Node(int data) {
+        this.data = data;
+        left = null;
+        right = null;
     }
 }
-
-
-
-class GfG {
-    
-    static Node buildTree(String str){
-        
-        if(str.length()==0 || str.charAt(0)=='N'){
-            return null;
-        }
-        
-        String ip[] = str.split(" ");
-        // Create the root of the tree
-        Node root = new Node(Integer.parseInt(ip[0]));
-        // Push the root to the queue
-        
-        Queue<Node> queue = new LinkedList<>(); 
-        
-        queue.add(root);
-        // Starting from the second element
-        
-        int i = 1;
-        while(queue.size()>0 && i < ip.length) {
-            
-            // Get and remove the front of the queue
-            Node currNode = queue.peek();
-            queue.remove();
-                
-            // Get the current node's value from the string
-            String currVal = ip[i];
-                
-            // If the left child is not null
-            if(!currVal.equals("N")) {
-                    
-                // Create the left child for the current node
-                currNode.left = new Node(Integer.parseInt(currVal));
-                // Push it to the queue
-                queue.add(currNode.left);
-            }
-                
-            // For the right child
-            i++;
-            if(i >= ip.length)
-                break;
-                
-            currVal = ip[i];
-                
-            // If the right child is not null
-            if(!currVal.equals("N")) {
-                    
-                // Create the right child for the current node
-                currNode.right = new Node(Integer.parseInt(currVal));
-                    
-                // Push it to the queue
-                queue.add(currNode.right);
-            }
-            i++;
-        }
-        
-        return root;
-    }
-    static void printInorder(Node root)
-    {
-        if(root == null)
-            return;
-            
-        printInorder(root.left);
-        System.out.print(root.data+" ");
-        
-        printInorder(root.right);
-    }
-    
-	public static void main (String[] args) throws IOException{
-	        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-	        
-	        int t=Integer.parseInt(br.readLine());
-    
-	        while(t-- > 0){
-	            String s = br.readLine();
-    	    	Node root = buildTree(s);
-    	        Solution ob = new Solution();
-			    ArrayList <Integer> res = ob.bottomView(root);
-			    for (Integer num : res) System.out.print (num + " ");
-		     	System.out.println();
-	        
-System.out.println("~");
-}
-	}
-}
-
-
-// } Driver Code Ends
-
-
-//User function Template for Java
-
+*/
 
 class Solution {
-    //Function to return the top view of Binary Tree.
-    static ArrayList<Integer> bottomView(Node root) {
-        ArrayList<Integer> ans = new ArrayList<>();
+    public void solve(Node root, int hzDist, int level, TreeMap<Integer, int[]> map){
+        if(root==null) return;
         
-        if (root == null) return ans;
-
-        // TreeMap to store nodes at each horizontal distance, only the first occurrence
-        TreeMap<Integer, Integer> map = new TreeMap<>();
-        Queue<Node> q = new LinkedList<>();
-        Queue<Integer> index = new LinkedList<>();
-
-        q.add(root);
-        index.add(0);
-
-        while (!q.isEmpty()) {
-            Node temp = q.poll();
-            int pos = index.poll();
-
-            // For top view, we only keep the first occurrence of a node at a horizontal distance
-            // if (!map.containsKey(pos)) {
-            map.put(pos, temp.data);
-
-            if (temp.left != null) {
-                q.add(temp.left);
-                index.add(pos - 1);
-            }
-
-            if (temp.right != null) {
-                q.add(temp.right);
-                index.add(pos + 1);
-            }
+        // Agar is horizontal distance (hd) pe koi node abhi tak nahi hai
+        // YA phir jo node pehle stored hai uska level <= current node ka level (matlab upar ka tha),
+        // to ab isko update kar do (kyunki hamesha neeche wali node hi bottom view me dikhni chahiye)
+        if(!map.containsKey(hzDist) || map.get(hzDist)[1] <= level){
+            map.put(hzDist, new int[]{root.data, level});
         }
-
-        // Extract the values from the map to the result list
-        ans.addAll(map.values());
-
-        return ans;
+        
+        // recursively check go for left and right subtree
+        solve(root.left, hzDist-1, level+1, map);
+        solve(root.right, hzDist+1, level+1, map);
+    }
+    public ArrayList<Integer> bottomView(Node root) {
+        ArrayList<Integer> list = new ArrayList<>();  // to store final ans
+        TreeMap<Integer, int[]> map = new TreeMap<>();  // why TreeMap not HashMap?  : to get the sorted order of the items
+        solve(root, 0, 0, map);  // start from root, hz=0, level=0
+        for(Integer n : map.keySet()){
+            list.add(map.get(n)[0]);
+        }
+        return list;
     }
 }
