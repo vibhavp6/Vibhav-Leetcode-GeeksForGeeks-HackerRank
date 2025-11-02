@@ -1,0 +1,10 @@
+<h2><a href="https://www.geeksforgeeks.org/problems/max-dag-edges/1">Max DAG Edges</a></h2><h3>Difficulty Level : Difficulty: Medium</h3><hr><div class="problems_problem_content__Xm_eO"><p class="MsoNormal"><span style="font-size: 14pt;">Given a directed acyclic graph (DAG) with <strong>V</strong> vertices numbered from 0 to V-1 and <strong>E</strong> edges, represented as a 2D array <strong>edges[][]</strong>, where each entry <strong>edges[i] = [u, v]</strong> denotes a directed edge from vertex <strong>u</strong> to vertex <strong>v</strong>, find the maximum number of additional edges that can be added to the graph without forming any cycles.</span></p>
+<p class="MsoNormal"><span style="font-size: 14pt;"><strong>Note:</strong> The resulting graph must remain a DAG, meaning that adding any further edge would not create a cycle.</span></p>
+<p><span style="font-size: 14pt;"><strong>Examples:</strong></span></p>
+<pre class="MsoNormal"><span style="font-size: 14pt;"><strong>Input:</strong> V = 3, E = 2, edges[][] = [[0, 1], [1, 2]]
+<strong>Output: </strong>1
+<strong>Explanation: </strong>The given DAG allows one more edge, 0 -&gt; 2, which keeps the structure acyclic. Adding anything else would create a cycle.</span></pre>
+<pre class="MsoNormal"><span style="font-size: 14pt;"><strong>Input:</strong> V = 4, E = 4, edges[][] = [[0, 1], [0, 2], [1, 2], [2, 3]]
+<strong>Output:</strong> 2
+<strong>Explanation: </strong>Two additional edges (0 -&gt; 3, 1 -&gt; 3) can be added without forming cycles.</span></pre>
+<p><span style="font-size: 14pt;"><strong>Constraints:</strong><br><span style="font-size: 18px;">1 ≤ V ≤ 10<sup>3<br></sup>0 ≤ E ≤ (V*(V-1))/2<br></span><span style="font-size: 18px;">0 ≤ edges[i][0], edges[i][1] &lt; V</span></span></p></div><br><p><span style=font-size:18px><strong>Topic Tags : </strong><br><code>Graph</code>&nbsp;<code>topological-sort</code>&nbsp;<code>Mathematical</code>&nbsp;
