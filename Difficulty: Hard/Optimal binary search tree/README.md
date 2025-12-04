@@ -1,0 +1,14 @@
+<h2><a href="https://www.geeksforgeeks.org/problems/optimal-binary-search-tree2214/1">Optimal binary search tree</a></h2><h3>Difficulty Level : Difficulty: Hard</h3><hr><div class="problems_problem_content__Xm_eO"><p><span style="font-size: 18px;">You are given a set of distinct keys in sorted order, which is represent by <strong>keys[]</strong>.<strong> </strong>Each key k<sub>i</sub> represents a data record that is accessed during a seach operation. For all the keys, you are also given a frequency array <strong>freq[], </strong>which denotes how many times key k<sub>i</sub> is searched for.<br>The <strong>cost </strong>of accessing a key in a binary search tree is calculated by <strong>multiplying </strong>its access frequency by the level at which it appears in the tree. Therefore different arrangements of keys in the BST gives different total search costs.</span></p>
+<p><span style="font-size: 18px;">Your task is to calculate the <strong>minimum </strong>total search cost required to construct a binary search tree containing all the keys.</span></p>
+<p><strong><span style="font-size: 18px;">Note: </span></strong><span style="font-size: 18px;">Consider t</span><span style="font-size: 18px;">he root of the BST is at level 1.</span></p>
+<p><span style="font-size: 18px;"><strong>Examples:</strong></span></p>
+<pre><span style="font-size: 18px;"><strong>Input: </strong>keys[] = [10, 12], freq[] = [34, 50]
+<strong>Output:</strong> 118
+<strong>Explaination: </strong>There can be following two possible BSTs<br>   <img src="https://media.geeksforgeeks.org/img-practice/prod/addEditProblem/916726/Web/Other/blobid1_1764762853.webp" width="254" height="197"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <br>The cost of tree I is 34*1 + 50*2 = 134
+The cost of tree II is 50*1 + 34*2 = 118</span></pre>
+<pre><span style="font-size: 18px;"><strong>Input: </strong>keys[] = [10, 12, 20], freq[] = [34, 8, 50]
+<strong>Output:</strong> 142
+<strong>Explaination:</strong> There can be many possible BSTs<br><img src="https://media.geeksforgeeks.org/img-practice/prod/addEditProblem/916726/Web/Other/blobid2_1764762936.webp" width="456" height="199"> <br>Among all possible BSTs, 
+cost of the 5th BST is minimum.  
+Cost of this BST is 1*50 + 2*34 + 3*8 = 142</span></pre>
+<p><span style="font-size: 18px;"><strong style="font-size: 18px;">Constraints:</strong><span style="font-size: 18px;"><br>1 ≤ keys.size() = freq.size() ≤ 100<br>1 ≤ keys[i], freq[i] ≤ 10<sup>4</sup></span></span></p></div><br><p><span style=font-size:18px><strong>Topic Tags : </strong><br><code>Dynamic Programming</code>&nbsp;<code>Binary Search Tree</code>&nbsp;<code>Data Structures</code>&nbsp;<code>Algorithms</code>&nbsp;
