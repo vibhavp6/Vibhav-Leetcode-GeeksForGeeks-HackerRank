@@ -1,0 +1,17 @@
+<h2><a href="https://www.geeksforgeeks.org/problems/row-with-max-1s0023/1">Row with max 1s</a></h2><h3>Difficulty Level : Difficulty: Medium</h3><hr><div class="problems_problem_content__Xm_eO"><p><span style="font-size: 14pt;">You are given a 2D binary array <code><strong>arr[][]</strong></code> consisting of only <code>1</code>s and <code>0</code>s. Each row of the array is sorted in non-decreasing order. Your task is to find and return the index of the first row that contains the maximum number of <code>1</code>s. If no such row exists, return <code>-1</code>.</span></p>
+<p><span style="font-size: 14pt;"><strong>Note:</strong></span></p>
+<ul>
+<li><span style="font-size: 14pt;">The array follows 0-based indexing.</span></li>
+<li><span style="font-size: 14pt;">The number of rows and columns in the array are denoted by <code>n</code> and <code>m</code> respectively.</span></li>
+</ul>
+<p><span style="font-size: 14pt;"><strong>Examples:</strong></span></p>
+<pre><span style="font-size: 14pt;"><strong>Input: </strong>arr[][] = [[0,1,1,1], [0,0,1,1], [1,1,1,1], [0,0,0,0]]
+<strong>Output:</strong> 2
+<strong>Explanation:</strong> Row 2 contains the most number of <code>1</code><span style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;">s (4 </span><code>1</code><span style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;">s). Hence, the output is </span><code>2</code><span style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;">.</span></span></pre>
+<pre><span style="font-size: 14pt;"><strong>Input: </strong>arr[][] = [[0,0], [1,1]]
+<strong>Output:</strong> 1
+<strong>Explanation:</strong> Row 1 contains the most number of <code>1</code><span style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;">s (2 </span><code>1</code><span style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;">s). Hence, the output is </span><code>1</code><span style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;">.</span></span></pre>
+<pre><span style="font-size: 14pt;"><strong>Input: </strong>arr[][] = [[0,0], [0,0]]
+<strong>Output:</strong> -1
+<strong>Explanation:</strong> No row contains any <code>1</code><span style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;">s, so the output is </span><code>-1</code><span style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;">.</span></span></pre>
+<p><span style="font-size: 14pt;"><strong>Constraints:</strong><br>1 ≤ arr.size(), arr[i].size()&nbsp;≤ 10<sup>3<br></sup>0 ≤ arr[i][j] ≤ 1&nbsp;</span></p></div><p><span style=font-size:18px><strong>Company Tags : </strong><br><code>Amazon</code>&nbsp;<code>Microsoft</code>&nbsp;<code>Snapdeal</code>&nbsp;<br><p><span style=font-size:18px><strong>Topic Tags : </strong><br><code>Arrays</code>&nbsp;<code>Matrix</code>&nbsp;<code>Data Structures</code>&nbsp;
