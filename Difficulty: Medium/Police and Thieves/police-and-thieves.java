@@ -1,22 +1,34 @@
 class Solution {
     public int catchThieves(char[] arr, int k) {
         // code here
-        int ans = 0;
-        int n = arr.length;
-        for(int i=0; i<n; i++) {
-            if(arr[i] == 'P') {
-                int l = Math.max(0, i - k);
-                int u = Math.min(n-1, i + k);
-                for(int j=l; j<=u; j++) {
-                    if(arr[j] == 'T') {
-                        ans++;
-                        arr[j] = 'S';
-                        break;
-                    }
-                }
-            }
+        if(k==0)
+        return 0;
+        
+        Queue<Integer>q= new LinkedList<>();
+
+        int n=arr.length;
+        int i=0;
+        int ans=0;
+        while(i<n)
+        {
+         
+               while(!q.isEmpty()&&i-q.peek()>k)
+               {
+                   q.poll();
+               }
+               if(!q.isEmpty()&&arr[q.peek()]!=arr[i])
+               {
+                   q.poll();
+                   ans++;
+               }
+             else{
+                 q.add(i);
+             }
+               
+           i++;
         }
         
         return ans;
     }
 }
+
