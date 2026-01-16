@@ -1,0 +1,13 @@
+<h2><a href="https://www.geeksforgeeks.org/problems/minimum-sprinklers/1">Minimum Number of Workers</a></h2><h3>Difficulty Level : Difficulty: Medium</h3><hr><div class="problems_problem_content__Xm_eO"><p data-start="96" data-end="207"><span style="font-size: 14pt;">You are given an array <strong>arr[]</strong>, where arr[i] denotes the range of working hours a person at position<strong> i </strong>can cover.</span></p>
+<ul>
+<li data-start="210" data-end="326"><span style="font-size: 14pt;">If <strong>arr[i] ≠ -1</strong>, the person at index i can work and cover the time interval <strong>[i - arr[i], i + arr[i]]</strong>.</span></li>
+<li data-start="329" data-end="421"><span style="font-size: 14pt;">If <strong>arr[i] = -1</strong>,&nbsp;the person is unavailable and cannot cover any time.</span></li>
+</ul>
+<p data-start="423" data-end="627"><span style="font-size: 14pt;">The task is to find the <strong>minimum </strong>number of people required to cover the entire working day from <strong>0 to n - 1</strong>. If it is not possible to fully cover the day, return <strong>-1</strong>.</span></p>
+<p><span style="font-size: 14pt;"><strong>Examples:</strong></span></p>
+<pre><span style="font-size: 14pt;"><strong>Input:</strong> arr[] = [1, 2, 1, 0]</span><br><span style="font-size: 14pt;"><strong>Output:</strong> 1</span><br><span style="font-size: 14pt;"><strong>Explanation:&nbsp;</strong>The person at index 1 can cover the interval [-1, 3]. After adjusting to valid bounds, this becomes [0, 3], which fully covers the entire working day 0 to n -1. Therefore, only 1 person is required to cover the whole day.</span></pre>
+<pre data-pm-slice="0 0 []"><span style="font-size: 14pt;"><strong>Input:</strong> arr[] = [2, 3, 4, -1, 2, 0, 0, -1, 0]</span><br><span style="font-size: 14pt;"><strong>Output: </strong>-1</span><br><span style="font-size: 14pt;"><strong>Explanation: </strong>Persons up to index 2 cover interval [0…6], but working hour 7 cannot be cover as arr[7] = -1, Since the 7th hour cannot be covered by any person, it is impossible to cover the full working day.</span></pre>
+<pre data-pm-slice="0 0 []"><span style="font-size: 14pt;"><strong>Input:</strong> arr[] = [0, 1, 0, -1]
+<strong>Output:</strong> -1
+<strong>Explanation: </strong>The last hour cannot be covered by any person, so it is impossible to cover the full working day.<br></span></pre>
+<p><span style="font-size: 14pt;"><strong>Constraints:<br></strong>1&nbsp;≤ arr.size()&nbsp;≤10<sup>5<br></sup>-1 ≤ arr[i] ≤ arr.size()</span></p></div><br><p><span style=font-size:18px><strong>Topic Tags : </strong><br><code>Greedy</code>&nbsp;<code>Sorting</code>&nbsp;<code>Arrays</code>&nbsp;
