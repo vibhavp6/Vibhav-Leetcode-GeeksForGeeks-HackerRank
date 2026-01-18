@@ -1,28 +1,22 @@
+import java.util.stream.*;
 class Solution {
-    public ArrayList<Integer> findGreater(int[] arr) {
+    public ArrayList<Integer> nextFreqGreater(int[] arr) {
+        // code here
+        Map<Integer, Long> map = Arrays.stream(arr)
+                                      .boxed()
+                                      .collect(Collectors.groupingBy(n -> n, Collectors.counting()));
+              
+        Stack<Integer> st = new Stack<>();
+        ArrayList<Integer> res = new ArrayList<>();
         int n = arr.length;
         
-        Map<Integer, Integer> map = new HashMap<>();
-        
-        for(int ele : arr) {
-            map.put(ele, map.getOrDefault(ele, 0) + 1);
-        }
-        ArrayList<Integer> ll = new ArrayList<>(Collections.nCopies(n, -1));
-        
-        Stack<Integer> stk = new Stack<>();
-        for(int i =n-1; i >= 0; i--) {
-            while(!stk.isEmpty() && map.get(stk.peek()) <= map.get(arr[i])) {
-                stk.pop();
+        for(int i=0; i<n; i++){
+            res.add(-1);
+            while(!st.isEmpty() && map.get(arr[st.peek()]) < map.get(arr[i])){
+                res.set(st.pop(), arr[i]);
             }
-            if(stk.isEmpty()) {
-                ll.set(i, -1);
-            } else {
-                ll.set(i, stk.peek());
-            }
-            stk.push(arr[i]);
+            st.push(i);
         }
-        return ll;
-        
+        return res;
     }
 }
-
