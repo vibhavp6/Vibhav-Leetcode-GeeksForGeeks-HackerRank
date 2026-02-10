@@ -1,36 +1,44 @@
 class Solution {
-    public static boolean canFinish(int[] arr, int k, int s){
-        int hours=0;
-        for(int val:arr){
-            hours+=(val+s-1)/s;
-        }
-        return hours<=k;
-    }
-     public static int getmax(int[] arr){
-          int max=arr[0];
-          for(int val:arr){
-              if(val>max){
-                  max=val;
-              }
-          }
-          return max;
-     }
     public int kokoEat(int[] arr, int k) {
         // code here
-        int left=1;
-        int right=getmax(arr);
-        int answer=right;
-      while(left<=right){
-          int mid=left+(right-left)/2;
-          if(canFinish(arr,k,mid)){
-              answer=mid;
-              right=mid-1;
-          }
-          else{
-              left=mid+1;
-          }
-      }
-      return answer;
-      }
+        
+        long max=0L;
+        
+        for(int c:arr)
+        {
+            
+            max=Math.max(max,(long)c);
+        }
+        long left=1L;
+       long right=max;
+        int ans=0;
+        
+        while(left<=right)
+        {
+            long mid=left+(right-left)/2L;
+            
+            if(check(arr,k,mid))
+            {
+                ans=(int)mid%1000000007;
+                right=mid-1;
+            }
+            else
+            {
+                left=mid+1;
+            }
+        }
+        return ans;
+    }
+    private boolean check(int[] arr,int k,long mid)
+    {
+        double d=0.0;
+        double m=(double)mid;
+        for(int n:arr)
+        {
+            d+=Math.ceil(n/m);
+            if(d>(double)k)
+            return false;
+        }
+        return true;
+    }
 }
-
